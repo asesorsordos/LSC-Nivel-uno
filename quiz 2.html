@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación dia 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+        }
+        .question-card {
+            transition: all 0.2s;
+            border-left: 5px solid #3b82f6; /* Blue-500 */
+        }
+        .option-label {
+            transition: background-color 0.15s, border-color 0.15s;
+        }
+        /* CLASES MODIFICADAS: Se elimina 'correct-answer' para no revelar la opción. */
+        .incorrect-answer {
+            background-color: #fee2e2; /* Red-100 */
+            border-color: #ef4444; /* Red-500 */
+        }
+        /* Custom radio button style to hide default */
+        input[type="radio"] {
+            display: none;
+        }
+        input[type="radio"]:checked + .option-label {
+            background-color: #e0f2fe; /* Light blue when selected */
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px #93c5fd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        
+        <header class="text-center mb-10 p-6 bg-white shadow-lg rounded-xl">
+            <h1 class="text-4xl font-extrabold text-blue-700"> Evaluación del Contenido: <br> Clasificaciones de Sordoceguera</h1>
+            <p class="text-xl text-slate-600 mt-2">Evalúa tu comprensión sobre el grado, origen y funcionamiento.</p>
+        </header>
+
+        <form id="quizForm" class="space-y-8">
+            <!-- Questions will be injected here by JavaScript -->
+            <div id="questionsContainer" class="space-y-6"></div>
+            
+            <div class="text-center pt-4">
+                <button type="button" onclick="submitQuiz()" class="px-8 py-3 bg-green-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-green-700 transition duration-300 transform hover:scale-105">
+                    Ver Resultados
+                </button>
+            </div>
+        </form>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden mt-10 p-6 bg-white shadow-2xl rounded-xl">
+            <h2 class="text-3xl font-bold text-center mb-4 text-blue-700">Tu Puntuación</h2>
+            <p id="scoreText" class="text-2xl text-center mb-6 font-semibold text-slate-800"></p>
+            <div id="feedbackContainer" class="space-y-6">
+                <!-- Detailed feedback for each question will be placed here -->
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.location.reload()" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
+                    Repetir Cuestionario
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data extracted from the provided quiz JSON structure
+        const quizData = [
+            {
+                question: "Según el texto, ¿qué porcentaje de la población total sordociega se estima que presenta sordoceguera total (sordera y ceguera completas)?",
+                options: [
+                    { text: "10% a 25%", isCorrect: false, rationale: "El texto indica que el porcentaje es menor, siendo la gran mayoría parcial." },
+                    { text: "Entre un 5% y un 10%", isCorrect: true, rationale: "Esta es la estimación proporcionada por el texto para los casos de sordoceguera total." },
+                    { text: "Casi el 50%", isCorrect: false, rationale: "El texto aclara que la sordoceguera parcial es la forma más prevalente." },
+                    { text: "Menos del 1%", isCorrect: false, rationale: "Aunque es una minoría, el porcentaje de sordoceguera total es ligeramente superior a esta cifra." }
+                ]
+            },
+            {
+                question: "¿Cuál de las siguientes clasificaciones se refiere a la persona que nace ciega (durante la gestación) y adquiere la sordera posteriormente?",
+                options: [
+                    { text: "Sordoceguera Adquirida", isCorrect: false, rationale: "La Sordoceguera Adquirida implica que ambas pérdidas ocurren después de la adquisición de la lengua." },
+                    { text: "Sordera Congénita con Ceguera Adquirida", isCorrect: false, rationale: "Esta clasificación implica que la sordera es la pérdida congénita, no la ceguera." },
+                    { text: "Ceguera Congénita con Sordera Adquirida", isCorrect: true, rationale: "Esta es la clasificación correcta para una ceguera de origen gestacional seguida de una sordera posterior." },
+                    { text: "Sordoceguera Parcial", isCorrect: false, rationale: "Esta clasificación se refiere al grado de la deficiencia, no al momento de su origen." }
+                ]
+            },
+            {
+                question: "Según la clasificación de funcionamiento, ¿qué nivel agrupa a personas que se estima que su comunicación quedará limitada a aspectos básicos como el conocimiento de cosas y personas?",
+                options: [
+                    { text: "Nivel Alto de Funcionamiento", isCorrect: false, rationale: "Este nivel se asocia con estrategias de resolución de problemas y una vida normalizada con ayudas." },
+                    { text: "Nivel Medio de Funcionamiento", isCorrect: false, rationale: "Este nivel es capaz de llevar una vida semi-independiente y generar estrategias cognitivas." },
+                    { text: "Nivel Básico de Interacción", isCorrect: false, rationale: "Esta no es una clasificación mencionada en el texto, el término correcto es 'Bajo Nivel'." },
+                    { text: "Bajo Nivel de Funcionamiento", isCorrect: true, rationale: "Este nivel describe la limitación comunicativa a aspectos fundamentales como el conocimiento de personas y cosas." }
+                ]
+            },
+            {
+                question: "Una persona capaz de generar estrategias para la resolución de problemas y llevar una vida semi-independiente encaja en el grupo de:",
+                options: [
+                    { text: "Alto Nivel de Funcionamiento", isCorrect: false, rationale: "El Alto Nivel se asocia a una vida y enseñanza normalizada, superando la semi-independencia." },
+                    { text: "Nivel Medio de Funcionamiento", isCorrect: true, rationale: "Las capacidades de interés cognitivo, resolución de problemas y semi-independencia definen el Nivel Medio." },
+                    { text: "Bajo Nivel de Funcionamiento", isCorrect: false, rationale: "Este nivel se limita a la comunicación de aspectos básicos como el conocimiento de cosas y personas." },
+                    { text: "Nivel de Transición", isCorrect: false, rationale: "Esta no es una clasificación contemplada en el texto proporcionado." }
+                ]
+            },
+            {
+                question: "¿Cuál de los siguientes es un rasgo característico del 'Componente Psicomotor' en un niño sordociego?",
+                options: [
+                    { text: "Dificultad para anticipar sucesos futuros.", isCorrect: false, rationale: "Este rasgo pertenece al componente cognitivo-comunicativo." },
+                    { text: "Inestabilidad postural.", isCorrect: true, rationale: "La inestabilidad postural, junto con los retrasos y problemas de Orientación y Movilidad (O&M), es un rasgo psicomotor." },
+                    { text: "Problemas de identidad.", isCorrect: false, rationale: "Este rasgo pertenece al componente afectivo social." },
+                    { text: "Retraso escolar general grave.", isCorrect: false, rationale: "Este rasgo pertenece al componente educativo." }
+                ]
+            },
+            {
+                question: "El rasgo 'Percibe al mundo de forma distorsionada' pertenece específicamente al componente:",
+                options: [
+                    { text: "Afectivo Social", isCorrect: false, rationale: "Este componente trata sobre la dependencia, las emociones y las relaciones sociales." },
+                    { text: "Psicomotor", isCorrect: false, rationale: "Este componente trata sobre el movimiento, la postura y la orientación." },
+                    { text: "Cognitivo-Comunicativo", isCorrect: true, rationale: "La percepción y comprensión de la realidad, y la dificultad para simbolizar, son características de este componente." },
+                    { text: "Educativo", isCorrect: false, rationale: "Este componente se enfoca en el desarrollo integral y el rendimiento académico." }
+                ]
+            },
+            {
+                question: "¿Cuál de los siguientes enunciados NO es un rasgo característico del 'Componente Afectivo Social'?",
+                options: [
+                    { text: "Dependencia en actividades de la vida diaria.", isCorrect: false, rationale: "Es un rasgo afectivo social." },
+                    { text: "Hipersensibilidad o insensibilidad a estímulos del entorno.", isCorrect: false, rationale: "Es un rasgo afectivo social." },
+                    { text: "Incapacidad para explorar, a pesar de una agudeza visual útil.", isCorrect: true, rationale: "Este comportamiento de exploración (o falta de ella) es mencionado bajo el componente psicomotor." },
+                    { text: "Pasividad o hiperactividad (Alteraciones de conducta).", isCorrect: false, rationale: "Es un rasgo afectivo social." }
+                ]
+            }
+        ];
+
+        const questionsContainer = document.getElementById('questionsContainer');
+        const resultsDiv = document.getElementById('results');
+        const scoreText = document.getElementById('scoreText');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+
+        // Function to render the quiz
+        function renderQuiz() {
+            quizData.forEach((q, qIndex) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'question-card bg-white p-5 rounded-lg shadow-md';
+                qCard.innerHTML = `
+                    <p class="text-xl font-semibold mb-4 text-slate-700">${qIndex + 1}. ${q.question}</p>
+                    <div class="options-group space-y-3" id="q${qIndex}">
+                        ${q.options.map((option, oIndex) => `
+                            <div>
+                                <input type="radio" id="q${qIndex}o${oIndex}" name="question${qIndex}" value="${oIndex}">
+                                <label for="q${qIndex}o${oIndex}" class="option-label block p-3 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 transition duration-150 text-slate-600">
+                                    ${option.text}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.appendChild(qCard);
+            });
+        }
+
+        // Function to submit and grade the quiz
+        window.submitQuiz = function() {
+            let score = 0;
+            feedbackContainer.innerHTML = '';
+
+            quizData.forEach((q, qIndex) => {
+                const optionsGroup = document.getElementById(`q${qIndex}`);
+                const selectedOption = document.querySelector(`input[name="question${qIndex}"]:checked`);
+                const isAnswered = !!selectedOption;
+                let isCorrect = false;
+                let finalRationale = 'No se seleccionó una respuesta.';
+
+                // Step 1: Process options, apply incorrect highlighting, find the rationales.
+                q.options.forEach((option, oIndex) => {
+                    const label = document.querySelector(`label[for="q${qIndex}o${oIndex}"]`);
+                    const input = document.getElementById(`q${qIndex}o${oIndex}`);
+                    
+                    // Remove previous result classes (including the now-removed 'correct-answer')
+                    label.classList.remove('incorrect-answer');
+
+                    if (isAnswered && input.checked) {
+                        if (option.isCorrect) {
+                            isCorrect = true;
+                            // When correct, set the positive rationale
+                            finalRationale = `¡Correcto! ${option.rationale}`; 
+                        } else {
+                            // User chose this incorrect option
+                            label.classList.add('incorrect-answer');
+                            // When incorrect, set the rationale of the chosen incorrect option
+                            finalRationale = `Tu respuesta no es correcta. Razón: ${option.rationale}`;
+                        }
+                    }
+                    
+                    // Disable options after submission
+                    input.disabled = true;
+                });
+                
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Step 2: Append detailed feedback card
+                const resultCard = document.createElement('div');
+                
+                let cardClass;
+                let resultText;
+                let titleColor;
+
+                if (isAnswered) {
+                    cardClass = isCorrect ? 'bg-green-50 border-green-400' : 'bg-red-50 border-red-400';
+                    titleColor = isCorrect ? 'text-green-800' : 'text-red-800';
+                    resultText = isCorrect ? 'Correcta' : 'Incorrecta';
+                } else {
+                    cardClass = 'bg-slate-100 border-slate-300';
+                    titleColor = 'text-slate-700';
+                    resultText = 'No Contestada';
+                    finalRationale = 'Debes seleccionar una opción para recibir retroalimentación.';
+                }
+                
+                resultCard.className = `p-4 rounded-lg shadow-sm ${cardClass} border`;
+                
+                resultCard.innerHTML = `
+                    <p class="text-lg font-bold mb-2 ${titleColor}">
+                        ${qIndex + 1}. ${q.question}
+                    </p>
+                    <p class="font-medium mt-2 text-slate-700"><strong>Resultado:</strong> ${resultText}</p>
+                    <p class="text-sm mt-2 text-slate-600"><strong>Retroalimentación:</strong> ${finalRationale}</p>
+                `;
+                
+                feedbackContainer.appendChild(resultCard);
+            });
+
+            // Display final score
+            const totalQuestions = quizData.length;
+            scoreText.innerHTML = `Obtuviste <span class="${score >= totalQuestions * 0.7 ? 'text-green-600' : 'text-red-600'} text-3xl">${score} / ${totalQuestions}</span> respuestas correctas.`;
+            
+            // Show results section and scroll to it
+            resultsDiv.classList.remove('hidden');
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+            
+            // Disable submit button after scoring
+            document.querySelector('button[onclick="submitQuiz()"]').disabled = true;
+        }
+
+        // Initialize quiz on page load
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+   
+ </section>
+
+        <section id="siguiente-leccion" style="text-align: center; border-bottom: none;color: #003366;background-color: #b5cce4;">
+            <h2 style="font-size: x-large;"> <b> Continuar Aprendiendo</b></h2>
+            <a href="Dia 3.html" target="_blank" class="llamada-accion"
+                style="display: inline-block; text-decoration:#e7f24c; font-size: 1.2em; padding: 15px 30px;">
+                ➡️ Ir a la siguiente Lección
+            </a>
+        </section>
+</body>
+</html>

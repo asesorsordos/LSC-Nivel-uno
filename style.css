@@ -1,0 +1,154 @@
+/* Estilos Generales y de Accesibilidad */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333333;
+}
+
+header {
+    background-color: #160ff4;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav {
+    background: #688ef0;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover, nav a:focus {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+section {
+    background: #f2f0f0;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #5b63a8;
+    color: #fff;
+}
+
+/* Tarjetas Interactivas */
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #453fe04d;
+    border-left: 5px solid #1f37ab;
+    margin: 10px;
+    padding: 15px;
+    width: 250px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Acordeón */
+.collapsible-btn {
+    background-color: #1313ecd9;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.collapsible-btn:hover, .collapsible-btn:focus {
+    background-color: #2f70a6;
+}
+
+.collapsible-content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
+
+/* Pestañas */
+.tabs {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab-link:hover, .tab-link:focus {
+    background-color: #b1cee5;
+}
+
+.tab-link.active {
+    background-color: #5b8ef3;
+}
+
+.tab-content {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+.button{
+    background-color: #2ac61c;
+    block-size: auto;
+    border-radius: 5px;
+    color: rgb(243, 238, 238);
+}
+.btn{
+size: 250;
+padding-bottom: 5px 2%;
+padding-right: 5px;
+padding-left: 5px;
+padding-top: 5px
+font-weight: bold
+font-style: oblique;
+font-size: 20px;
+position: :right;
+overflow: unset;
+
+    background-color: #05468b;
+    border-radius: 10px;
+    color: rgb(243, 238, 238)
+    
+}

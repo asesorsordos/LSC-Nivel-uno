@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chosen Palette: Warm Neutrals with Calm Blue Accent -->
+    <!-- Application Structure Plan: Se ha diseñado una SPA con 4 secciones principales navegables mediante una sticky-bar superior: Visión General (Grado), Origen y Trayectoria, Potencial Funcional y Componentes y Rasgos. Esta estructura temática reemplaza la jerarquía original del informe y prioriza la exploración por concepto clave. La sección de Rasgos utiliza un sistema de acordeón para manejar la alta densidad de texto, mientras que las clasificaciones se presentan con gráficos de Chart.js (Radar/Barra) y tarjetas interactivas para una comprensión inmediata. -->
+    <!-- Visualization & Content Choices: 1. Grado de Sordoceguera -> Objetivo: Informar la proporción principal -> Viz/Presentación: Gráfico de Dona y Tarjetas KPI. Interacción: Estático. Justificación: Muestra el dato clave (90% parcial) de forma inmediata. 2. Origen -> Objetivo: Organizar definiciones complejas -> Viz/Presentación: Tarjetas interactivas con JS para 'flip' o expandir. Interacción: Click para ver definición. Justificación: Mejora la legibilidad de las 4 trayectorias. 3. Funcionamiento -> Objetivo: Comparar niveles de capacidad -> Viz/Presentación: Gráfico de Barras Horizontal. Interacción: Estático con detalle en tooltip. Justificación: Muestra la diferencia de capacidades entre Bajo, Medio y Alto nivel. 4. Rasgos -> Objetivo: Profundizar en listados largos -> Viz/Presentación: Acordeón. Interacción: Click para expandir/colapsar. Justificación: Previene la sobrecarga de información. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        .sticky-nav a:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .accordion-content {
+            transition: all 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .accordion-button.active .arrow {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="min-h-screen">
+
+        <!-- Sticky Navigation -->
+        <nav id="sticky-nav" class="sticky top-0 z-10 bg-white shadow-lg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                <div class="flex flex-wrap justify-center md:justify-start space-x-2 md:space-x-4">
+                    <a href="#general"
+                        class="text-sm md:text-base font-medium text-slate-600 p-2 rounded-lg transition duration-150 ease-in-out">Visión
+                        General</a>
+                    <a href="#origen"
+                        class="text-sm md:text-base font-medium text-slate-600 p-2 rounded-lg transition duration-150 ease-in-out">Origen</a>
+                    <a href="#funcional"
+                        class="text-sm md:text-base font-medium text-slate-600 p-2 rounded-lg transition duration-150 ease-in-out">Potencial
+                        Funcional</a>
+                    <a href="#rasgos"
+                        class="text-sm md:text-base font-medium text-slate-600 p-2 rounded-lg transition duration-150 ease-in-out">Rasgos
+                        Generales</a>
+                    <a href="#quiz"
+                        class="text-sm md:text-base font-medium text-slate-600 p-2 rounded-lg transition duration-150 ease-in-out">Quiz</a>
+
+                </div>
+            </div>
+        </nav>
+
+        <header class="container mx-auto px-4 pt-8 pb-4">
+            <h1 class="text-4xl font-extrabold text-blue-700 text-center">Clasificaciones de la Sordoceguera</h1>
+            <p class="text-center text-xl text-slate-600 mt-2">Herramienta para el análisis de las tipologías y
+                características asociadas.</p>
+        </header>
+
+        <main class="container mx-auto p-4 md:p-8 space-y-12">
+
+            <!-- SECCIÓN 1: GRADO DE SORDOCEGUERA -->
+            <section id="general" class="bg-white p-6 rounded-xl shadow-xl">
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 border-b pb-2">1. Clasificación según el Grado de
+                    Sordoceguera</h2>
+                <p class="text-lg mb-6 text-slate-600">Esta sección proporciona una visión general de la población
+                    sordociega, destacando la importancia de identificar y aprovechar los restos sensoriales para la
+                    comunicación y la accesibilidad.</p>
+
+                <div class="grid md:grid-cols-3 gap-6 items-center">
+
+                    <div class="md:col-span-2">
+                        <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                            <p class="text-xl font-semibold text-blue-700 mb-4">La Realidad de los Restos Sensoriales
+                            </p>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <span class="text-4xl">👁️‍🗨️</span>
+                                <p class="text-lg">Se estima que el <strong class="text-blue-700">90%</strong> de la
+                                    población sordociega posee todavía **restos sensoriales** (visuales y/o auditivos)
+                                    que deben aprovecharse al máximo.</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-4xl">⚫</span>
+                                <p class="text-lg">Solo entre el **5% y 10%** de los casos corresponden a la
+                                    **Sordoceguera Total** (sordera y ceguera completas, 0% de percepción de luz).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="chart-container relative w-full h-80 max-h-[350px] max-w-sm mx-auto p-4 bg-white rounded-lg shadow-inner">
+                        <canvas id="degreeChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: ORIGEN DE LA SORDOCEGUERA -->
+            <section id="origen" class="bg-white p-6 rounded-xl shadow-xl">
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 border-b pb-2">2. Clasificación según el Origen y
+                    Momento de Adquisición</h2>
+                <p class="text-lg mb-6 text-slate-600">El momento en que se adquieren las deficiencias es crucial, ya
+                    que determina si la persona ha logrado adquirir o consolidar un lenguaje materno (lengua oral o de
+                    signos) antes de la pérdida sensorial. Haga clic en cada tipo para ver su definición.</p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Origen Card 1 -->
+                    <div id="origin-1"
+                        class="origin-card bg-slate-100 p-5 rounded-lg border border-slate-200 cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="toggleOriginDetail(1)">
+                        <h3 class="text-xl font-bold text-blue-700">Sordoceguera Congénita</h3>
+                        <p class="text-sm mt-2 text-slate-500">Haz clic para ver la definición</p>
+                        <div id="detail-1" class="mt-3 hidden text-slate-700">
+                            <span class="font-semibold">Definición:</span> El deterioro de la audición y la visión se
+                            produjo durante la gestación o antes de que la persona adquiera una lengua materna.
+                        </div>
+                    </div>
+                    <!-- Origen Card 2 -->
+                    <div id="origin-2"
+                        class="origin-card bg-slate-100 p-5 rounded-lg border border-slate-200 cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="toggleOriginDetail(2)">
+                        <h3 class="text-xl font-bold text-blue-700">Sordera Congénita + Ceguera Adquirida</h3>
+                        <p class="text-sm mt-2 text-slate-500">Haz clic para ver la definición</p>
+                        <div id="detail-2" class="mt-3 hidden text-slate-700">
+                            <span class="font-semibold">Definición:</span> La persona nace sorda y adquiere la ceguera
+                            posteriormente en su vida.
+                        </div>
+                    </div>
+                    <!-- Origen Card 3 -->
+                    <div id="origin-3"
+                        class="origin-card bg-slate-100 p-5 rounded-lg border border-slate-200 cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="toggleOriginDetail(3)">
+                        <h3 class="text-xl font-bold text-blue-700">Ceguera Congénita + Sordera Adquirida</h3>
+                        <p class="text-sm mt-2 text-slate-500">Haz clic para ver la definición</p>
+                        <div id="detail-3" class="mt-3 hidden text-slate-700">
+                            <span class="font-semibold">Definición:</span> La persona nace ciega (durante la gestación)
+                            y adquiere la sordera posteriormente.
+                        </div>
+                    </div>
+                    <!-- Origen Card 4 -->
+                    <div id="origin-4"
+                        class="origin-card bg-slate-100 p-5 rounded-lg border border-slate-200 cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="toggleOriginDetail(4)">
+                        <h3 class="text-xl font-bold text-blue-700">Sordoceguera Adquirida</h3>
+                        <p class="text-sm mt-2 text-slate-500">Haz clic para ver la definición</p>
+                        <div id="detail-4" class="mt-3 hidden text-slate-700">
+                            <span class="font-semibold">Definición:</span> Ambas deficiencias son adquiridas después del
+                            periodo de adquisición de la lengua (oral o de signos).
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: POSIBILIDADES DE FUNCIONAMIENTO -->
+            <section id="funcional" class="bg-white p-6 rounded-xl shadow-xl">
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 border-b pb-2">3. Clasificación según Posibilidades de
+                    Funcionamiento</h2>
+                <p class="text-lg mb-6 text-slate-600">Esta clasificación es útil para determinar la modalidad de
+                    comunicación y el nivel de apoyo pedagógico. Se basa en las capacidades cognitivas y de interacción
+                    del individuo.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 items-start">
+
+                    <!-- Gráfico de Capacidades -->
+                    <div
+                        class="chart-container relative w-full h-96 max-h-[450px] mx-auto p-4 bg-white rounded-lg shadow-inner">
+                        <canvas id="functionChart"></canvas>
+                    </div>
+
+                    <!-- Tarjetas de Descripción -->
+                    <div class="space-y-4">
+                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500 shadow-md">
+                            <h3 class="text-xl font-bold text-red-700">Bajo Nivel</h3>
+                            <p class="text-sm text-slate-700">Comunicación limitada a aspectos básicos como el
+                                conocimiento de cosas y personas. Requerirá apoyo significativo.</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500 shadow-md">
+                            <h3 class="text-xl font-bold text-yellow-700">Nivel Medio</h3>
+                            <p class="text-sm text-slate-700">Capaz de interesarse cognitivamente por el mundo, generar
+                                estrategias para la resolución de problemas y llevar una vida semi-independiente.</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500 shadow-md">
+                            <h3 class="text-xl font-bold text-green-700">Alto Nivel</h3>
+                            <p class="text-sm text-slate-700">Sin otro límite cognitivo que el derivado de la propia
+                                sordoceguera. Susceptible de llevar una vida y enseñanza normalizada con las ayudas
+                                necesarias.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 4: RASGOS GENERALES DE UN NIÑO SORDOCIEGO -->
+            <section id="rasgos" class="bg-white p-6 rounded-xl shadow-xl">
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 border-b pb-2">4. Rasgos Generales por Componente</h2>
+                <p class="text-lg mb-6 text-slate-600">A continuación, se agrupan las posibles características de la
+                    niñez sordociega. Es importante recordar que estos rasgos varían en cada caso particular y no son
+                    una norma que aparezcan todos a la vez.</p>
+
+                <div class="space-y-4 max-w-3xl mx-auto" id="traits-accordion">
+                    <!-- Componente 1 -->
+                    <div class="border border-slate-200 rounded-lg">
+                        <button
+                            class="accordion-button w-full p-4 text-left font-semibold text-lg bg-blue-50 hover:bg-blue-100 flex justify-between items-center"
+                            data-target="c-comunicativo">
+                            Componente Cognitivo-Comunicativo
+                            <span class="arrow text-blue-600 text-xl transition-transform">▼</span>
+                        </button>
+                        <div id="c-comunicativo" class="accordion-content bg-white p-4">
+                            <ul class="list-disc ml-5 space-y-1 text-slate-700">
+                                <li>Presenta graves problemas de comunicación y comprensión.</li>
+                                <li>Percibe al mundo de forma distorsionada.</li>
+                                <li>Dificultad para anticipar sucesos o resultados de sus acciones.</li>
+                                <li>Dificultades serias en la interacción.</li>
+                                <li>Alteraciones en la capacidad de simbolización y categorización.</li>
+                                <li>Anomalías de integración, y representación perceptual y/o lingüística.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Componente 2 -->
+                    <div class="border border-slate-200 rounded-lg">
+                        <button
+                            class="accordion-button w-full p-4 text-left font-semibold text-lg bg-blue-50 hover:bg-blue-100 flex justify-between items-center"
+                            data-target="c-psicomotor">
+                            Componente Psicomotor
+                            <span class="arrow text-blue-600 text-xl transition-transform">▼</span>
+                        </button>
+                        <div id="c-psicomotor" class="accordion-content bg-white p-4">
+                            <ul class="list-disc ml-5 space-y-1 text-slate-700">
+                                <li>Se ve limitado a un espacio reducido o restringido a moverse libremente.</li>
+                                <li>Percepciones distintas de las sensaciones táctiles.</li>
+                                <li>Pobres respuestas propioceptivas e inestabilidad postural.</li>
+                                <li>Distorsión de la información visual y auditiva.</li>
+                                <li>Retrasos generalizados, graves, en su desarrollo psicomotor.</li>
+                                <li>Inhibición en el movimiento espontáneo y lentitud.</li>
+                                <li>Problemas de orientación y movilidad.</li>
+                                <li>Conductas desadaptadas severas: estereotipias, autolesiones.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Componente 3 -->
+                    <div class="border border-slate-200 rounded-lg">
+                        <button
+                            class="accordion-button w-full p-4 text-left font-semibold text-lg bg-blue-50 hover:bg-blue-100 flex justify-between items-center"
+                            data-target="c-afectivo">
+                            Componente Afectivo Social
+                            <span class="arrow text-blue-600 text-xl transition-transform">▼</span>
+                        </button>
+                        <div id="c-afectivo" class="accordion-content bg-white p-4">
+                            <ul class="list-disc ml-5 space-y-1 text-slate-700">
+                                <li>Dependencia en actividades de la vida diaria.</li>
+                                <li>Alteraciones emocionales (reacciones inesperadas o anormales).</li>
+                                <li>Excesiva dependencia afectiva y problemas de identidad.</li>
+                                <li>Falta de apetencia intelectual y de exploración.</li>
+                                <li>Alteraciones de conducta (Pasividad o hiperactividad).</li>
+                                <li>Dificultad o incapacidad para establecer relaciones sociales.</li>
+                                <li>Hipersensibilidad o insensibilidad a estímulos físicos, sociales o emocionales.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Componente 4 -->
+                    <div class="border border-slate-200 rounded-lg">
+                        <button
+                            class="accordion-button w-full p-4 text-left font-semibold text-lg bg-blue-50 hover:bg-blue-100 flex justify-between items-center"
+                            data-target="c-educativo">
+                            Componente Educativo
+                            <span class="arrow text-blue-600 text-xl transition-transform">▼</span>
+                        </button>
+                        <div id="c-educativo" class="accordion-content bg-white p-4">
+                            <ul class="list-disc ml-5 space-y-1 text-slate-700">
+                                <li>Lentitud en su desarrollo integral.</li>
+                                <li>Necesidad de comprobar una y otra vez por mucho tiempo.</li>
+                                <li>Poca discriminación entre ellos y el ambiente.</li>
+                                <li>Aprovechamiento de la capacidad cognitiva por debajo del promedio.</li>
+                                <li>Retraso escolar general grave.</li>
+                                <li>Alteraciones en la lectoescritura.</li>
+                                <li>Mayor lentitud en la realización de las tareas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 5: Quiz -->
+            <section id="quiz" class="bg-white p-6 rounded-xl shadow-xl">
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 border-b pb-2">Quiz</h2>
+                <button
+                    style="background-color: rgb(191, 218, 219);border: rgb(0, 0, 0);cursor: pointer; padding: 5px 10px; padding-bottom: 5px"><a
+                        href="quiz 2.html" target="_blank"
+                        class="text-blue-600 underline font-bold hover:text-green-500 transition duration-400 background-color: rgb(191, 218, 219);">Realizar
+                        Cuestionario</a></button>
+
+                
+            </section>
+
+        </main>
+
+        <footer class="text-center p-6 mt-12 text-slate-500 border-t">
+            <p>© Análisis de Clasificaciones de Sordoceguera. Herramienta diseñada para consulta rápida y didáctica.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Chart.js Initialization ---
+
+            // Chart 1: Grado de Sordoceguera (Donut Chart)
+            const degreeCtx = document.getElementById('degreeChart').getContext('2d');
+            new Chart(degreeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Sordoceguera Parcial (Restos sensoriales)', 'Sordoceguera Total (0% de percepción)'],
+                    datasets: [{
+                        data: [90, 10],
+                        backgroundColor: ['#2563EB', '#93C5FD'],
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#334155',
+                                font: {
+                                    size: 14
+                                },
+                                usePointStyle: true
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribución por Grado de Sordoceguera (%)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#334155'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Niveles de Funcionamiento (Horizontal Bar Chart)
+            const functionCtx = document.getElementById('functionChart').getContext('2d');
+            new Chart(functionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Bajo Nivel', 'Nivel Medio', 'Alto Nivel'],
+                    datasets: [{
+                        label: 'Capacidad Cognitiva y de Interacción (Escala Funcional)',
+                        data: [40, 75, 100], // Valores representativos de la capacidad
+                        backgroundColor: ['#F87171', '#FBBF24', '#10B981'],
+                        borderColor: ['#EF4444', '#F59E0B', '#059669'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Nivel Relativo de Funcionamiento (0-100)',
+                                color: '#334155'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#334155',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Comparación de Niveles de Funcionamiento',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#334155'
+                        }
+                    }
+                }
+            });
+
+            // --- Interactive Logic ---
+
+            // Function for Origin Classification Card Toggle (Section 2)
+            window.toggleOriginDetail = function (id) {
+                const detail = document.getElementById(`detail-${id}`);
+                const card = document.getElementById(`origin-${id}`);
+
+                if (detail.classList.contains('hidden')) {
+                    detail.classList.remove('hidden');
+                    card.classList.add('bg-blue-200', 'shadow-xl');
+                    card.querySelector('p').classList.add('hidden');
+                } else {
+                    detail.classList.add('hidden');
+                    card.classList.remove('bg-blue-200', 'shadow-xl');
+                    card.querySelector('p').classList.remove('hidden');
+                }
+            }
+
+            // Function for General Traits Accordion (Section 4)
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const contentId = button.getAttribute('data-target');
+                    const content = document.getElementById(contentId);
+                    const isActive = button.classList.contains('active');
+                    const arrow = button.querySelector('.arrow');
+
+                    // Toggle active class on button
+                    button.classList.toggle('active');
+
+                    if (!isActive) {
+                        // Open panel
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        arrow.style.transform = 'rotate(180deg)';
+                        button.classList.add('bg-blue-200');
+                        button.classList.remove('bg-blue-50');
+                    } else {
+                        // Close panel
+                        content.style.maxHeight = '0';
+                        arrow.style.transform = 'rotate(0deg)';
+                        button.classList.remove('bg-blue-200');
+                        button.classList.add('bg-blue-50');
+                    }
+                });
+            });
+
+            // Set initial state for accordions (all closed)
+            document.querySelectorAll('.accordion-content').forEach(content => {
+                content.style.maxHeight = '0';
+            });
+        });
+
+        // Smooth scrolling for navigation (Optional but enhances UX)
+        document.querySelectorAll('.sticky-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

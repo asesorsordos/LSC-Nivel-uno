@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación dia 1</title>
+    <style>
+        /* Estilos CSS (similares a la página principal) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #004d99; /* Azul institucional */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        .pregunta-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .pregunta-item p {
+            font-weight: bold;
+            color: #004d99;
+            margin-top: 0;
+        }
+
+        .opcion label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .opcion label:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Estilos para el botón de calificación */
+        #btnCalificar {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ffcc00;
+            color: #003366;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 30px;
+        }
+
+        #btnCalificar:hover {
+            background-color: #e6b800;
+        }
+
+        /* Estilos para el resultado final */
+        #resultado {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 6px;
+            font-size: 1.2em;
+            text-align: center;
+            display: none; /* Oculto por defecto */
+        }
+        
+        /* Estilos para la retroalimentación individual */
+        .correcto {
+            background-color: #e6ffe6; /* Verde claro */
+            border: 1px solid #008000;
+        }
+
+        .incorrecto {
+            background-color: #ffe6e6; /* Rojo claro */
+            border: 1px solid #cc0000;
+        }
+
+        .explicacion {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+            border-top: 1px dotted #ccc;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✅ Evaluación del Contenido: Sordoceguera</h1>
+        <p>Verifique su comprensión sobre esta discapacidad única y los métodos de comunicación.</p>
+    </header>
+
+    <div class="container">
+        
+        <form id="quizForm">
+            
+            <div class="pregunta-item">
+                <p>1. ¿Cómo se define correctamente la sordoceguera, según la información proporcionada?</p>
+                <div class="opcion">
+                    <input type="radio" id="q1a" name="q1" value="a">
+                    <label for="q1a">a) Es la suma de la sordera total y la ceguera total.</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q1b" name="q1" value="b">
+                    <label for="q1b">b) Es una enfermedad neurodegenerativa que afecta a los sentidos.</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q1c" name="q1" value="c">
+                    <label for="q1c">c) Una discapacidad única donde los impedimentos visual y auditivo multiplican su impacto.</label>
+                </div>
+            </div>
+
+            <div class="pregunta-item">
+                <p>2. ¿Cuáles son las tres áreas críticas de limitación que experimentan TODAS las personas sordociegas?</p>
+                <div class="opcion">
+                    <input type="radio" id="q2a" name="q2" value="a">
+                    <label for="q2a">a) El equilibrio, el habla y la autonomía económica.</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q2b" name="q2" value="b">
+                    <label for="q2b">b) Comunicación, Acceso a la Información y Movilidad/Orientación.</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q2c" name="q2" value="c">
+                    <label for="q2c">c) Lectura Braille, uso de audífonos y participación social.</label>
+                </div>
+            </div>
+
+            <div class="pregunta-item">
+                <p>3. La población sordociega es muy homogénea, ya que el grado de pérdida sensorial no afecta significativamente sus necesidades individuales.</p>
+                <div class="opcion">
+                    <input type="radio" id="q3a" name="q3" value="a">
+                    <label for="q3a">a) Verdadero</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q3b" name="q3" value="b">
+                    <label for="q3b">b) Falso</label>
+                </div>
+            </div>
+
+            <div class="pregunta-item">
+                <p>4. ¿Qué sentido se utiliza en el ejemplo de "Jesús calma la tormenta" para representar el **sonido del viento y el poder** de Cristo?</p>
+                <div class="opcion">
+                    <input type="radio" id="q4a" name="q4" value="a">
+                    <label for="q4a">a) El resto visual (luz LED).</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q4b" name="q4" value="b">
+                    <label for="q4b">b) La vibración (háptica).</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q4c" name="q4" value="c">
+                    <label for="q4c">c) El gusto (alimentos dulces).</label>
+                </div>
+            </div>
+
+            <div class="pregunta-item">
+                <p>5. ¿Cuál es la principal conclusión sobre el Evangelio y la sordoceguera?</p>
+                <div class="opcion">
+                    <input type="radio" id="q5a" name="q5" value="a">
+                    <label for="q5a">a) "La fe viene por el *tocar*, por el *sentir*, por el *ser acompañado*."</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q5b" name="q5" value="b">
+                    <label for="q5b">b) "Se debe esperar hasta que el individuo aprenda Braille y LSE."</label>
+                </div>
+                <div class="opcion">
+                    <input type="radio" id="q5c" name="q5" value="c">
+                    <label for="q5c">c) "La comunicación solo es posible mediante el uso exclusivo de audífonos y gafas.</label>
+                </div>
+            </div>
+
+            <button type="button" id="btnCalificar">Calificar Evaluación</button>
+        </form>
+
+        <div id="resultado"></div>
+        
+    </div>
+
+    <script>
+        document.getElementById('btnCalificar').addEventListener('click', function() {
+            const respuestasCorrectas = {
+                q1: 'c', 
+                q2: 'b', 
+                q3: 'b', 
+                q4: 'b', 
+                q5: 'a'  
+            };
+
+            let puntuacion = 0;
+            const form = document.getElementById('quizForm');
+            const preguntas = form.querySelectorAll('.pregunta-item');
+            const resultadoDiv = document.getElementById('resultado');
+            
+            // Limpiar resultados previos
+            preguntas.forEach(pregunta => {
+                pregunta.classList.remove('correcto', 'incorrecto');
+                pregunta.querySelectorAll('.explicacion').forEach(el => el.remove());
+            });
+
+            preguntas.forEach((pregunta, index) => {
+                const nombrePregunta = `q${index + 1}`;
+                const respuestaUsuario = form.elements[nombrePregunta].value;
+                const respuestaCorrecta = respuestasCorrectas[nombrePregunta];
+                const item = pregunta;
+
+                // Calificar
+                let esCorrecto = false;
+                if (respuestaUsuario === respuestaCorrecta) {
+                    puntuacion++;
+                    item.classList.add('correcto');
+                    esCorrecto = true;
+                } else {
+                    item.classList.add('incorrecto');
+                }
+
+                // Generar retroalimentación sin revelar la respuesta correcta
+                const explicacionDiv = document.createElement('div');
+                explicacionDiv.className = 'explicacion';
+                
+                if (esCorrecto) {
+                    explicacionDiv.innerHTML = '¡Correcto! Has entendido el concepto clave.';
+                } else {
+                    // Mensaje genérico sin revelar la respuesta
+                    explicacionDiv.innerHTML = `Incorrecto. Por favor, revisa la sección de contenido para reforzar este concepto.`;
+                }
+
+                item.appendChild(explicacionDiv);
+            });
+
+            // Mostrar el resultado final
+            const totalPreguntas = Object.keys(respuestasCorrectas).length;
+            const porcentaje = (puntuacion / totalPreguntas) * 100;
+
+            if (porcentaje >= 80) {
+                resultadoDiv.className = 'correcto';
+                resultadosHTML = `🎉 ¡Felicidades! Puntuación: ${puntuacion}/${totalPreguntas} (${porcentaje.toFixed(0)}%). Has demostrado un excelente conocimiento.`;
+            } else if (porcentaje >= 50) {
+                resultadoDiv.className = '';
+                resultadoDiv.style.backgroundColor = '#fffacd'; /* Amarillo suave */
+                resultadoDiv.style.border = '1px solid #ffcc00';
+                resultadosHTML = `👍 Buen intento. Puntuación: ${puntuacion}/${totalPreguntas} (${porcentaje.toFixed(0)}%). Repasa las secciones de la página principal para mejorar.`;
+            } else {
+                resultadoDiv.className = 'incorrecto';
+                resultadosHTML = `⚠️ Necesitas reforzar conceptos. Puntuación: ${puntuacion}/${totalPreguntas} (${porcentaje.toFixed(0)}%). Te recomendamos releer la definición y el Evangelio Táctil.`;
+            }
+
+            resultadoDiv.innerHTML = resultadosHTML;
+            resultadoDiv.style.display = 'block';
+        });
+        
+    </script>
+ </section>
+
+        <section id="siguiente-leccion" style="text-align: center; border-bottom: none;color: #003366;background-color: #b5cce4;">
+            <h2>Continuar Aprendiendo</h2>
+            <a href="Dia 2.html" target="_blank" class="llamada-accion"
+                style="display: inline-block; text-decoration: none; font-size: 1.2em; padding: 15px 30px;">
+                ➡️ Ir a la siguiente Lección
+            </a>
+        </section>
+
+</body>
+</html>

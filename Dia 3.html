@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dia 3</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts: Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --secondary: #6c757d;
+      --success: #198754;
+      --info: #0dcaf0;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --light: #f8f9fa;
+      --dark: #212529;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding-top: 76px;
+      /* Espacio para navbar fija */
+    }
+
+    .progress-container {
+      position: fixed;
+      top: 56px; /* Altura de la navbar */
+      left: 0;
+      width: 100%;
+      z-index: 1029; /* Debajo de la navbar */
+      padding: 0 1rem;
+      background: rgba(255,255,255,0.8);
+    }
+
+    .navbar {
+      background: rgba(13, 110, 253, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.9)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    .section-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 1rem 1.5rem;
+      border: none;
+    }
+
+    .accordion-button {
+      font-weight: 500;
+      background: #e7f1ff;
+      color: var(--primary);
+    }
+
+    .accordion-button:not(.collapsed) {
+      background: var(--primary);
+      color: white;
+    }
+
+    .system-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .nav-pills .nav-link {
+      border-radius: 50px;
+      margin: 0.25rem;
+      font-weight: 500;
+    }
+
+    .nav-pills .nav-link.active {
+      background: var(--primary);
+    }
+
+    .tab-content {
+      background: white;
+      border-radius: 0 0 15px 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .quiz-card {
+      border: 2px solid var(--info);
+    }
+
+    .quiz-question {
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .answer-btn {
+      transition: all 0.2s;
+    }
+
+    .answer-btn.correct {
+      background: var(--success) !important;
+      color: white;
+    }
+
+    .answer-btn.incorrect {
+      background: var(--danger) !important;
+      color: white;
+    }
+
+    .modal-content {
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .glossary-term {
+      cursor: pointer;
+      color: var(--primary);
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .glossary-term:hover {
+      color: var(--dark);
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--success), var(--info));
+    }
+    
+    .alphabet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .alphabet-letter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero {
+        padding: 70px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar fija -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><i class="fas fa-hands-asl-interpreting me-2"></i>Sordoceguera</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#grupos">Grupos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sistemas">Sistemas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
+          <li class="nav-item"><a class="nav-link" href="#recursos">Recursos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="container">
+      <h1>Diversidad de los Sistemas de Comunicación</h1>
+      <p class="lead mt-3">Aprende sobre la comunicación con personas sordociegas</p>
+      <a href="#grupos" class="btn btn-light btn-lg mt-4"><i class="fas fa-arrow-down me-2"></i>Comenzar</a>
+    </div>
+  </section>
+
+  <!-- Progreso del usuario -->
+  <div class="progress-container">
+      <div class="d-flex justify-content-between align-items-center mb-1 mt-2">
+        <span class="fw-bold small">Progreso del curso</span>
+        <span id="progress-percent" class="small">0%</span>
+      </div>
+      <div class="progress" style="height: 6px;">
+        <div class="progress-bar" role="progressbar" style="width: 0%" id="progress-bar"></div>
+      </div>
+  </div>
+
+  <div class="container my-5">
+    <!-- Introducción y Grupos -->
+    <section id="grupos" class="mb-5">
+      <div class="section-card">
+        <div class="card-header">
+          <h2 class="h4 mb-0"><i class="fas fa-users me-2"></i>Grupos de Personas Sordociegas</h2>
+        </div>
+        <div class="card-body" style="margin: 1rem 1rem 1rem;">
+
+          <p style="text-align: justify; margin-left: 1rem; margin-right: 1rem;">El sistema de comunicación que cada
+            persona usa para transmitir sus pensamientos, ideas, emociones y
+            sentimientos está íntimamente ligado a la situación personal que esta ha experimentado en el transcurso de
+            su vida, por lo tanto, no se puede pretender que todas las personas tengan uniformidad en el sistema de
+            comunicación utilizado, además no todos los individuos cuentan con las mismas habilidades y capacidades
+            personales, ni las mismas oportunidades educativas, familiares y sociales que les permitan conseguir buenos niveles
+            de aprendizaje y acceso a la formación.</p>
+          <p class="lead" style="text-align: center; color: #4043f1;"><b>El sistema de comunicación está ligado a la
+              experiencia personal. <br> No todas las personas tienen
+              las mismas habilidades, oportunidades educativas o sociales.</b></p>
+
+          <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 border-primary">
+                <div class="card-body text-center">
+                  <i class="fas fa-baby system-icon text-primary"></i>
+                  <h3 class="h5 card-title">Grupo 1: <br> Congénitas o tempranas</h3>
+                  <p class="card-text">Personas sordociegas de nacimiento o que adquirieron la sordoceguera a temprana
+                    edad. <br> Presentan problemas adicionales por incomunicación o discapacidades asociadas.</p>
+                  <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalGrupo1">Más
+                    información</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 border-success">
+                <div class="card-body text-center">
+                  <i class="fas fa-eye system-icon text-success"></i>
+                  <h3 class="h5 card-title">Grupo 2: <br> Adquiridas</h3>
+                  <p class="card-text">Personas que tuvieron visión/audición normal durante la infancia y la perdieron
+                    progresivamente. <br> Prefieren usar restos sensoriales mientras sea posible.</p>
+                  <button class="btn btn-outline-success mt-2" data-bs-toggle="modal" data-bs-target="#modalGrupo2">Más
+                    información</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info mt-4">
+            <i class="fas fa-lightbulb me-2"></i><strong>Nota clave:</strong> El cambio de sistema de comunicación puede
+            ser traumático. Se recomienda acompañamiento gradual y anticipado.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sistemas de Comunicación -->
+    <section id="sistemas">
+      <div class="section-card">
+        <div class="card-header">
+          <h2 class="h4 mb-0"><i class="fas fa-comments me-2"></i>Sistemas de comunicación usados por las personas
+            sordociegas</h2>
+        </div>
+        <div class="card-body">
+          <p class="lead">Explora los diferentes sistemas organizados en categorías. <span
+              style="font-style: italic; font-size: medium;"> Haz clic en cada pestaña para
+              aprender más.</span> </p>
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-pills nav-fill mb-4" id="sistemasTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#alfabeticos" type="button">
+                <i class="fas fa-spell-check me-1"></i>Alfabéticos
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#no-alfabeticos" type="button">
+                <i class="fas fa-hands me-1"></i>No Alfabéticos o signados
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#lengua-oral" type="button">
+                <i class="fas fa-microphone me-1"></i>Basados en la <br> Lengua Oral
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#escritura" type="button">
+                <i class="fas fa-pen me-1"></i>Basados en <br> Códigos de Escritura
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#apoyo" type="button">
+                <i class="fas fa-life-ring me-1"></i>Recursos de Apoyo <br> comunicativo
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" data-bs-toggle="pill" data-bs-target="#otros" type="button">
+                <i class="fas fa-ellipsis-h me-1"></i>Otros <br> sistemas de comunicación
+              </button>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+
+            <!-- Alfabéticos -->
+            <div class="tab-pane fade show active" id="alfabeticos">
+              <p> Los sistemas alfabéticos son los que están basados en el <span class="glossary-term"
+                  data-bs-toggle="modal" data-bs-target="#glosarioModal" data-term="deletreo"> deletreo</span>, cada
+                letra del alfabeto tiene una
+                representación, generalmente se ejecuta sobre la palma de la mano, en la cual se transcribe letra a
+                letra el contenido del mensaje, guardando la estructura propia de la lengua oral. Se requiere que la
+                persona sordociega tenga una buena capacidad de síntesis para integrar las palabras del mensaje y una
+                buena capacidad de discriminación táctil. Puede ser utilizado como sistema de comunicación habitual o
+                como sistema de apoyo, generalmente para expresar nombres o palabras que no tienen una seña
+                definida. </p>
+              <p style="text-align: justify;"><b>Es importante tener en cuenta:</b> <br>
+                ✔️ Se debe preguntar a la persona sordociega en que mano desea recibir la información. <br>
+                ✔️ La velocidad del deletreo dependerá de las condiciones sensoriales de cada persona sordociega, su
+                habilidad y fluidez en el sistema, etc. <br> En ocasiones el hacer una pequeña pausa entre las palabras
+                le
+                facilitará la discriminación de estas. <br>
+                ✔️ No se usan acentos ni signos de puntuación, a no ser que se quieran utilizar como un elemento para
+                dar
+                énfasis a la comunicación. <br>
+                ✔️ Se utilizan signos de interrogación o admiración, porque dan una información necesaria para la
+                comprensión y contextualización del mensaje. <br> Dependiendo de acuerdos con cada persona, puede
+                incluirse
+                más información (paréntesis para indicar que es un comentario aparte, etc.).
+              </p>
+              <div class="accordion" id="accordionAlfabeticos">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#dactilologico">
+                      Sistema Dactilológico (Alfabeto Manual)
+                    </button>
+                  </h2>
+                  <p style="text-align: justify;">Este sistema generalmente lo usan las personas sordociegas que
+                    primeramente han tenido pérdida
+                    auditiva y son usuarios de la lengua de señas, luego al irse deteriorando su visión, continúan
+                    utilizando la lengua de señas adaptada a su pérdida visual, y el sistema dactilológico en el aire
+                    como apoyo, es así como este sistema se puede realizar en varias versiones:</p>
+                  <div id="dactilologico" class="accordion-collapse collapse show"
+                    data-bs-parent="#accordionAlfabeticos">
+                    <div class="accordion-body">
+                      <div class="row">
+                        <div class="card-body">
+                          <h5><strong>Sistema dactilológico visual en el aire</strong></h5>
+                          <p style="text-align: justify;">El interlocutor debe Colocarse de frente a la persona
+                            sordociega a la distancia que esta
+                            pueda percibir, cuidado de no mover mucho la mano al deletrear, para mantenerse dentro de su
+                            campo de visión. La velocidad de ejecución de cada letra está determinada por las
+                            características del resto visual, fluidez y habilidad de deletreo de cada persona
+                            sordociega.</p>
+                          <center> <img src="dacti en aire.jpg" alt=""> </center>
+                        </div>
+
+                        <div class="card-body">
+                          <br>
+                          <h5><strong>Sistema dactilológico visual-táctil</strong></h5>
+                          <p style="text-align: justify;">Como en el caso anterior el interlocutor realiza el alfabeto
+                            dactilológico (Siguiendo las
+                            mismas recomendaciones de ubicación y fluidez) en el aire y la persona sordociega va tocando
+                            y reconociendo cada una de las letras con su mano.</p>
+                          <center> <img src="visual dactil.jpg" alt=""> </center>
+                        </div>
+
+                        <div class="card-body">
+                          <br> <strong>
+                            <h5>Sistema dactilológico táctil o en palma</h5>
+                          </strong>
+                          <p style="text-align: justify;">Se realiza el alfabeto dactilológico, teniendo en cuenta la
+                            configuración y ubicación total
+                            de cada letra sobre la palma de la mano de la persona sordociega, para que esta pueda
+                            captarlas táctilmente.
+                            Las letras que se emplean en la versión táctil son similares a la visual, pero con algunas
+                            modificaciones en su configuración o ejecución que favorecen una mejor discriminación
+                            táctil. </p>
+                          <center> <img src="dacti en mano.jpg" alt=""> </center>
+                        </div>
+                      </div>
+                      <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal"
+                        data-bs-target="#modalDactilologico">
+                        <i class="fas fa-image"></i> Ver alfabeto
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#mayusculas">
+                      Escritura en letras mayúsculas
+                    </button>
+                  </h2>
+                  <div id="mayusculas" class="accordion-collapse collapse" data-bs-parent="#accordionAlfabeticos">
+                    <div class="accordion-body" style="text-align: justify;">
+                      El interlocutor escribe con su dedo índice el mensaje, letra a letra (aunque algunos prefieren
+                      varias letras seguidas en un renglón), sobre la palma de la mano de la persona sordociega,
+                      utilizando letras mayúsculas estilo imprenta, lo más estándares posible, evitando estilos
+                      personales diferentes.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#dedo-lapiz">
+                      El dedo como lápiz
+                    </button>
+                  </h2>
+                  <div id="dedo-lapiz" class="accordion-collapse collapse" data-bs-parent="#accordionAlfabeticos">
+                    <div class="accordion-body" style="text-align: justify;">
+                      El interlocutor toma el dedo índice de la persona sordociega y escribe con él como si fuera un
+                      lápiz. <br> Las letras utilizadas pueden ser mayúsculas o minúsculas, según la preferencia de la
+                      persona sordociega. <br> Se puede escribir en el aire, sobre la palma de la mano de la persona con
+                      sordoceguera, la del interlocutor o sobre una superficie plana.
+                      <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                        <img src="dedo como lapiz .jpg" width="auto" height="300" alt="">
+                        <img src="dedo como lapiz.jpg" width="auto" height="300" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#braille-manual">
+                      Braille Manual
+                    </button>
+                  </h2>
+                  <div id="braille-manual" class="accordion-collapse collapse" data-bs-parent="#accordionAlfabeticos">
+                    <div class="accordion-body">
+                      <p style="text-align: justify;"> Es un método de lectoescritura a través del tacto que utilizan
+                        las personas ciegas. <br> En el caso de
+                        las personas sordociegas que lo conocen y lo utilizan, el braille no se limita solo a eso, sino
+                        que puede convertirse en un sistema alternativo de comunicación, se trata de aprovechar el
+                        conocimiento que tiene la persona sordociega de este sistema para aplicarlo a la transmisión de
+                        mensajes y a la interpretación. <br> El interlocutor deletrea el contenido de lo que desea
+                        comunicar
+                        letra a letra, utilizando las correspondencias de cada letra del alfabeto con el sistema braille
+                        sobre la mano de la persona sordociega.</p>
+                      <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                        <img src="brailler dedos.jpg" width="auto" height="300" alt="">
+                        <img src="brailler tacto.jpg" width="auto" height="300" alt="">
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Alfabéticos -->
+            <div class="tab-pane fade" id="no-alfabeticos">
+              <p style="text-align: justify;">Los sistemas de comunicación no alfabéticos consisten en la transmisión de
+                una palabra o una idea
+                completa a través de una seña, por lo que suelen suponer una transmisión más rápida de los mensajes que
+                los sistemas alfabéticos. Pueden ser recibidos por la persona sordociega por el canal visual o el
+                táctil.</p>
+              <p style="text-align: justify;">
+              <h5></h5><strong> Lengua de señas </strong></h5><br>
+              Las personas sordociegas utilizan la misma lengua de señas que la comunidad sorda, pero con una serie de
+              adaptaciones que se deben realizar en concordancia a los restos visuales que cada persona posea.
+              </p>
+              <div class="row">
+
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-eye"></i> Lengua de Señas en campo visual</h5>
+                    <p style="text-align: justify;">Se realiza una serie de adaptaciones que modifican esta forma de
+                      comunicación para que sea más
+                      fácilmente perceptible por la persona sordociega a través de su canal visual, ya que la
+                      distancia entre la persona ciega y el interlocutor se hace más reducida, así mismo se hace la
+                      producción de las señas dentro de su campo visual.</p>
+                    <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                      <img src="lsc corta distancia.jpg" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-hand-paper"></i> Lengua de Señas táctil o apoyada</h5>
+                    <p style="text-align: justify;">En este sistema la persona sordociega «cuelga» sus manos de las
+                      manos de su interlocutor,
+                      colocándolas sobre el dedo índice, tocando directamente la configuración de los signos,
+                      percibiendo el lugar y la orientación y siguiendo el movimiento de las manos.</p>
+                    <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                      <img src="lsc apoyada.jpg" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Lengua Oral -->
+            <div class="tab-pane fade" id="lengua-oral">
+              <p style="text-align: justify;">Este grupo de sistemas consiste en la transmisión de los mensajes a través
+                de la lengua oral, con
+                distintas adaptaciones, que es percibida por la persona sordociega a través de distintos canales de
+                comunicación: el auditivo, el visual o el táctil.</p>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <i class="fas fa-ear fa-3x text-info mb-3"></i>
+                      <h6>Lengua oral adaptada</h6>
+                      <p style="text-align: justify;">Consiste en emitir los mensajes en lengua oral para que sean
+                        percibidos por la persona
+                        sordociega a través de sus restos auditives. <br>
+                        El interlocutor deberá estar muy atento para amoldarse a las necesidades individuales de cada
+                        persona. Este se ubicará del lado del oído con mayor resto auditivo, a la distancia que necesite
+                        la persona sordociega para percibir el sonido, hablar con un volumen un poco más elevado de lo
+                        normal, haciendo uso de buena vocalización a una velocidad moderada dependerá de las necesidades
+                        concretas de cada persona
+                        .</p>
+                      <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                        <img src="lengua oral adaptada.jpg" width="auto" height="200" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <i class="fas fa-eye fa-3x text-warning mb-3"></i>
+                      <h6>Lectura labial</h6>
+                      <p style="text-align: justify;">La lectura labial consiste en leer, a través del movimiento de los
+                        labios de la persona que habla, las palabras que emite. Para ello, la persona que recibe el
+                        mensaje debe tener un elevado conocimiento de la lengua oral y buena fluidez en el uso del
+                        sistema. <br>
+                        Este sistema presenta una serie de dificultades, incluso para la persona más competen te, ya que
+                        algunos estudios consideran que solo se es capaz de leer en los labios alrededor de un 30% de la
+                        información, perdiéndose un 70%.
+                      </p>
+                      <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                        <img src="la-Labiolectura.jpg" width="auto" height="180" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <i class="fas fa-hand-sparkles fa-3x text-success mb-3"></i>
+                      <h6>Tadoma</h6>
+                      <p style="text-align: justify;">Este sistema tiene como objetivo la percepción de la lengua oral a
+                        través del tacto. La persona
+                        sordociega coloca los dedos de una o ambas manos sobre la boca, cara y gar ganta del
+                        interlocutor, de manera que pueda notar el movimiento de los labios, los maxilares y las
+                        vibraciones producidas por la salida del aire en la cara y cuello cuando está hablando.</p>
+                      <div class="container" style="display: flex; justify-content: center; align-items: center;">
+                        <img src="labiolectura mano-boca.jpg" width="auto" height="200" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Códigos de Escritura -->
+            <div class="tab-pane fade" id="escritura">
+              <p style="text-align: justify;">Estos sistemas utilizan la escritura, ya sea en caracteres ordinario o con
+                el método braille para
+                transmitir los mensajes dependiendo de sus restos visuales y de su conocimiento del braille utilizarán
+                una u otra versión</p>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <strong>Escritura en caracteres ordinarios en papel</strong>
+                  <p style="text-align: justify;">
+                    Consiste en transmitir a la persona sordociega aun con restos visuales los mensajes de forma escrita
+                    con el alfabeto ordinario en un papel. <br>
+                    El interlocutor tendrá que ir haciendo pausas, acercarle el papel a la persona sordociega y tener en
+                    cuenta: <br>
+                    👉🏼 Seleccionar el grosor del trazo. <br>
+                    👉🏼 Elegir el color de la tinta y el color del papel para el adecuado contraste entre estos. <br>
+                    👉🏼 El tamaño y tipo de la letra. <br>
+                    👉🏼 Es importante tener en cuenta la separación entre renglones. </p>
+
+                </li>
+                <li class="list-group-item">
+                  <strong>Escritura en caracteres ordinarios a través de medios técnicos</strong>
+                  <p style="text-align: justify;">
+                    Algunas personas
+                    sordociegas prefieren leer los mensajes no sobre un papel, sino sobre la pantalla de un
+                    computador/Tablet. <br> En esta situación, el interlocutor va escribiendo el mensaje con el teclado
+                    ordinario del ordenador y la persona sordociega está sentada a su lado, leyendo directamente de la
+                    pantalla, a la distancia que ella misma considere necesaria.</p>
+                </li>
+                <li class="list-group-item">
+                  <strong>Escritura en braille en papel o a través de medios técnicos</strong>
+                  <p style="text-align: justify;">
+                    Este sistemaConsiste en transmitir a
+                    la persona sordociega los mensajes utilizando el sistema de lectoescritura Braille a través del
+                    papel,
+                    el computador u otras ayudas técnicas.</p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Recursos de Apoyo -->
+            <div class="tab-pane fade" id="apoyo">
+              <p style="text-align: justify;">Son una serie de recursos que están a disposición de las personas
+                sordociegas para momentos concretos
+                de contacto con personas que desconocen sus sistemas habituales de comunicación, como pueden ser en caso
+                de necesitar ayuda en situaciones de emergencia, para mensajes breves, para situaciones desconocidas,
+                con los compañeros de trabajo, etc.</p>
+              <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                  <div class="card-body">
+                    <h5 class="card-title">Tablillas de comunicación</h5>
+                    <p style="text-align: justify;">Son unas tablillas rígidas que en una de sus caras llevan impresas
+                      en relieve las letras del
+                      alfabeto bien contrastadas con el fondo. <br> En una de las modalidades figura el alfabeto
+                      ordinario
+                      y, en otra, las letras del alfabeto ordinario con su correspondiente letra en braille debajo. <br>
+                      La persona sordociega va deletreando el mensaje, señalando sucesivamente las letras sobre la
+                      tablilla con su dedo índice, de forma que el interlocutor va leyendo el mensaje. <br> Para
+                      responderle, la otra persona toma el dedo de la persona sordociega y lo va llevando por la
+                      tablilla.
+                    </p>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                      <img src="Tablilla.jpg" width="auto" height="300" alt="">
+                      <img src="Tablillabrailler atras.jpg" width="auto" height="300" alt="">
+                      <img src="Tablillabrailler uso.jpg" width="auto" height="300" alt="">
+                      <img src="Tablillabrailler.jpg" width="auto" height="300" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">Tarjetas de comunicación</h5>
+                      <p style="text-align: justify;">Esta forma de apoyo consiste en unas tarjetas, elaboradas
+                        generalmente con cartulina o algún
+                        material consistente, que llevan mensajes impresos preparados previamente para comunicar
+                        mensajes puntuales a otras personas. <br> Si la persona sordociega que las maneja no tiene
+                        ningún
+                        resto visual y conoce el sistema braille, pueden llevar una pequeña marca escrita en este
+                        sistema en una de las esquinas. <br>
+                        El tipo de mensajes que suelen llevar impresos son para situaciones variadas, como, por ejemplo,
+                        para cruzar la calle: «Soy una persona sordociega. Por favor, ayúdeme a cruzar la calle
+                        tomándome del brazo».
+                      </p>
+                      <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <img src="letrero101.png" width="auto" height="300" alt="">
+                        <img src="letrero102.png" width="auto" height="300" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">Mensajes breves en caracteres ordinarios o en braille</h5>
+                      <p style="text-align: justify;">La escritura en caracteres ordinarios es muy útil para la
+                        transmisión de mensajes breves a
+                        personas que desconocen los sistemas de comunicación con las personas sordociegas. <br> Para
+                        este
+                        efecto, la persona sordociega lleva consigo una libreta o un papel y un bolígrafo de los que
+                        echa mano en caso de necesidad. <br>
+                        La persona sordociega debe aprender a tener en cuenta que el mensaje que escriba debe ser claro
+                        y directo, de forma que de opción a una sola respuesta posible para evitar confusiones.
+                      </p>
+                      <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <img src="caracteres ordinarios.jpg" width="auto" height="300" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">Dibujos</h5>
+                      <p style="text-align: justify;">Se trata de transmitir los mensajes a través de dibujos más o
+                        menos complejos, como forma de
+                        apoyar la comunicación con alguna persona sordociega que no domine un sistema de comunicación
+                        completo, por falta de rehabilitación o con una situación personal muy peculiar. <br> También
+                        puede
+                        utilizarse con personas sordociegas de bajo nivel cultural que tengan dificultades en un momento
+                        dado para comprender un concepto que se le esté transmitiendo.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Otros -->
+            <div class="tab-pane fade" id="otros">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5>Dactyls</h5>
+                      <p style="text-align: justify;">Este método se basa en la utilización del sistema dactilológico
+                        táctil junto con elementos
+                        tomados de la lengua de señas, realizados sobre la palma de la mano o brazo de la persona
+                        sordociega y adaptados para permitir una fácil captación a través del tacto. <br> El mensaje se
+                        va
+                        transmitiendo letra a letra con el sistema dactilológico y se sustituye el deletreo de algunas
+                        palabras por su signo correspondiente.</p>
+                      <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <img src="dactyls.jpg" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5>Bimodal</h5>
+                      <p style="text-align: justify;">Este sistema consiste en el empleo de la lengua oral acompañada de señas tomadas de la Lengua
+                        de Señas. <br> Puede ir complementado con algunas marcas especificas inventadas para el caso. <br> No se
+                        trata del uso de dos lenguas: la oral y la de señas, ya que ambas tienen una estructura y unos
+                        recursos muy diferentes: la estructura básica es la de la lengua oral y se utilizan las señas
+                        para ayudar a visualizar y comprender los mensajes.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz Interactivo -->
+    <section id="quiz" class="my-5">
+      <div class="section-card quiz-card">
+        <div class="card-header bg-info text-white">
+          <h2 class="h4 mb-0"><i class="fas fa-question-circle me-2"></i>Quiz Interactivo</h2>
+        </div>
+        <div class="card-body">
+          <div id="quiz-container">
+            <div class="quiz-question mb-4">
+              <p id="question-text"></p>
+              <div id="answers" class="row g-2"></div>
+            </div>
+            <div id="quiz-result" class="mt-4"></div>
+            <button id="next-question" class="btn btn-primary mt-3" style="display:none;">Siguiente pregunta</button>
+          </div>
+          <div id="quiz-complete" class="text-center" style="display:none;">
+            <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
+            <h3>¡Felicidades!</h3>
+            <p id="final-score"></p>
+            <button class="btn btn-success" id="restart-quiz">Volver a intentar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recursos Adicionales -->
+    <section id="recursos" class="my-5">
+                         <div class="section-card">
+                         <div class="card-header bg-success text-white">
+                            <h2 class="h4 mb-0"><i class="fas fa-book me-2"></i>Recursos Adicionales</h2>
+                             </div>
+                               <div class="card-body">
+                           <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                     <div class="card">
+                                        <div class="card-body">
+                                   <a href="https://educativo.insor.gov.co/catdiccionario/alfabeto/" target="_blank" class="btn btn-outline-primary btn-sm">Visitar pagina <br> INSOR</a>
+                                    <a href="https://centrodediacondealyo.com/2025/06/26/que-es-la-sordoceguera/" target="_blank" class="btn btn-outline-primary btn-sm">Visitar pagina <br> Centro de Día Con Dealyo</a>
+                               <a href="https://www.inci.gov.co/" target="_blank" class="btn btn-outline-primary btn-sm">Visitar pagina <br> INCI</a>
+                               <a href="https://www.plenainclusion.org/discapacidad-intelectual/recurso/comunicacion-bimodal/" target="_blank" class="btn btn-outline-primary btn-sm">Visitar pagina <br> Plena Inclusión</a>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-video text-danger"></i> YouTube</h5>
+                                   <!--<p class="card-text">Visitar canal Youtube:</p>-->
+                                    <a href="https://www.youtube.com/channel/UCygYaHSEhrH-ixahY5iPA5A" target="_blank" class="btn btn-outline-danger btn-sm">Ver videos</a>
+                                </div>
+                            </div>
+                        </div>
+                             </div>
+                                  </div>
+                              </div>
+                          </section>
+
+  </div>
+
+  </section>
+
+        <section id="siguiente-leccion" style="text-align: center; border-bottom: none;color: #003366;background-color: #b5cce4;">
+            <h2>Continuar Aprendiendo</h2>
+            <a href="/Dia 4.html" target="_blank" class="llamada-accion"
+                style="display: inline-block; text-decoration: none; font-size: 1.2em; padding: 15px 30px;">
+                ➡️ Ir a la siguiente Lección
+            </a>
+        </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2025 Plataforma Educativa sobre Sordoceguera. <br> Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p>Diseñado con <i class="fas fa-heart text-danger"></i> para la inclusión</p>por: <i>Over Guerrero</i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modales -->
+
+  <!-- Modal Grupo 1 -->
+  <div class="modal fade" id="modalGrupo1" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Grupo 1: Sordoceguera congénita o temprana</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p style="text-align: justify;">Estas personas han vivido en incomunicación desde temprana edad, lo que genera
+            problemas en personalidad y
+            conducta. <br> Discapacidades adicionales reducen posibilidades de usar restos sensoriales.</p>
+          <ul>
+            <li>Mayor dependencia de sistemas táctiles</li>
+            <li>Necesidad de intervención temprana</li>
+            <li>Aprendizaje más lento de conceptos abstractos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Grupo 2 -->
+  <div class="modal fade" id="modalGrupo2" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">Grupo 2: Sordoceguera adquirida</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p style="text-align: justify;"></strong>En general, mientras aún poseen restos sensoriales auditivos y/o
+            visuales, van a preferir aprovecharlos
+            para comunicarse, aunque estén deteriorados, en decir, que pretenden seguir utilizando su forma habitual de
+            comunicación tanto tiempo como les sea posible. Esto hace sentir a la persona que sigue “viviendo como
+            antes”, que se mantiene vinculada a su vida anterior, lo que supone para ella una ruptura menos traumática,
+            y le hace mantener su identidad y aferrarse a lo conocido y familiar. <br>
+            Cuando estos últimos van perdiendo estos restos sensoriales o ya no les son útiles, es muy complicado que lo
+            acepten y es allí donde es de vital importancia el acompañamiento y entrenamiento, que es preferible irlo
+            haciendo anticipadamente de forma gradual, pues además de otras implicaciones de la sordoceguera, la
+            necesidad de cambiar de sistemas de comunicación les hace sentir frustrados por tener que adaptar su forma
+            de comunicación, ya que este paso supondría el reconocimiento y la aceptación psicológica de su nueva
+            situación. <br>
+            Es frecuente que haya personas sordociegas que sigan utilizando sistemas que realmente no les permiten recibir
+            adecuadamente los mensajes, pero que anímicamente les hacen sentirse más seguros. En estos casos, el
+            interlocutor debe esforzarse aún más, no debe imponer drásticamente un nuevo sistema de comunicación, sino
+            que se debe adaptar al que se está usando y verificar a través de retroalimentación que las verdades
+            bíblicas sean recibidas a totalidad por ellos y que el mensaje no quede a medias.
+            <br> Cambio de sistema
+            = aceptación de nueva condición.
+          </p>
+          <div class="alert alert-warning">
+            <strong>Importante:</strong> No imponer cambios drásticos. Acompañamiento gradual.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Alfabeto Dactilológico -->
+  <div class="modal fade" id="modalDactilologico" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Alfabeto Dactilológico</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="alphabet-grid">
+            <div class="alphabet-letter">A <img src="A.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">B <img src="b.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">C <img src="C.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">D <img src="d.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">E <img src="e.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">F <img src="f.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">G <img src="g.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">H <img src="h.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">I <img src="i.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">J <img src="j.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">K <img src="k.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">L <img src="l.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">M <img src="m.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">N <img src="n.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">O <img src="o.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">P <img src="p.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">Q <img src="q.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">R <img src="r.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">S <img src="s.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">T <img src="t.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">U <img src="u.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">V <img src="v.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">W <img src="w.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">X <img src="x.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">Y <img src="y.jpg" width="100" height="100"></div>
+            <div class="alphabet-letter">Z <img src="z.jpg" width="100" height="100"></div>
+          </div>
+          <p class="mt-3"><em><a href="https://youtu.be/3YJmWh5Amtk" target="_blank">Clic aquí</a> para ver video.</em></p>
+</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Glosario -->
+  <div class="modal fade" id="glosarioModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Glosario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="glosario-content">
+          <!-- Contenido dinámico -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Datos del Quiz
+    const quizData = [
+      {
+        question: "¿Cuál es la principal diferencia entre los dos grupos de personas sordociegas?",
+        answers: [
+          "El grupo 1 nace con sordoceguera, el grupo 2 la adquiere después",
+          "El grupo 1 prefiere sistemas visuales, el grupo 2 táctiles",
+          "El grupo 1 tiene más restos sensoriales",
+          "No hay diferencias significativas"
+        ],
+        correct: 0
+      },
+      {
+        question: "¿Qué sistema NO es alfabético?",
+        answers: ["Dactilológico en palma", "Lengua de señas táctil", "Escritura en mayúsculas", "Braille manual"],
+        correct: 1
+      },
+       {
+        question: "En lectura labial, ¿qué porcentaje aproximado de información se capta?",
+        answers: ["70%", "50%", "30%", "90%"],
+        correct: 2
+      },
+      {
+        question: "¿En cuántos grandes grupos se clasifican las personas sordociegas según la lección?",
+        answers: ["1", "2", "3", "4"],
+        correct: 1
+      },
+        {
+        question: "¿Qué debe considerar el interlocutor al escribir en papel para persona con restos visuales?",
+        answers: ["Grosor, contraste, tamaño y separación", "Solo usar lápiz", "Escribir muy rápido", "Usar colores claros"],
+        correct: 1
+      },
+      {
+        question: "¿Qué recurso se usa para emergencias con desconocidos?",
+        answers: ["Tablillas de comunicación", "Lengua oral adaptada", "Dactyls", "Braille en pantalla"],
+        correct: 0
+      },
+       {
+        question: "¿Qué caracteriza al grupo de personas sordociegas de nacimiento o temprana edad?",
+        answers: ["Mayor uso de restos visuales", "Problemas de conducta por incomunicación", "Prefieren lectura labial", "No tienen discapacidades añadidas"],
+        correct: 1
+      },
+      {
+        question: "¿Qué combina el sistema Dactyls?",
+        answers: ["Dactilológico táctil + elementos de lengua de señas", "Solo dibujos", "Voz y braille",  "Lectura labial + audífonos"],
+        correct: 2
+      },
+        {
+        question: "¿Qué estructura básica tiene el sistema Bimodal?",
+        answers: ["Lengua de señas pura", "Lengua oral con apoyo de señas", "Braille en pantalla", "Solo escritura"],
+        correct: 1
+      },
+      {
+        question: "El método Tadoma percibe la habla mediante:",
+        answers: ["Resto auditivo", "Lectura labial", "Tacto en cara y garganta", "Vibraciones en el aire"],
+        correct: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let userProgress = 0;
+
+    // Progreso general
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      userProgress = Math.round(scrollPercent);
+
+      document.getElementById('progress-percent').textContent = userProgress + '%';
+      document.getElementById('progress-bar').style.width = userProgress + '%';
+    }
+
+    // Glosario
+    const glossary = {
+      'deletreo': 'Escritura o representación de un mensaje letra por letra, en lugar de por palabras completas. <br> Requieren buena síntesis y discriminación táctil.'
+    };
+
+    document.querySelectorAll('.glossary-term').forEach(term => {
+      term.addEventListener('click', function () {
+        const word = this.getAttribute('data-term');
+        document.getElementById('glosario-content').innerHTML = `<p><strong>${word.charAt(0).toUpperCase() + word.slice(1)}:</strong> ${glossary[word]}</p>`;
+      });
+    });
+
+    // Quiz
+    function loadQuestion() {
+      if (currentQuestion >= quizData.length) {
+        endQuiz();
+        return;
+      }
+
+      const q = quizData[currentQuestion];
+      document.getElementById('question-text').textContent = q.question;
+
+      const answersDiv = document.getElementById('answers');
+      answersDiv.innerHTML = '';
+
+      q.answers.forEach((answer, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6';
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-outline-primary w-100 answer-btn';
+        btn.textContent = answer;
+        btn.onclick = () => selectAnswer(index, q.correct);
+        col.appendChild(btn);
+        answersDiv.appendChild(col);
+      });
+
+      document.getElementById('quiz-result').innerHTML = '';
+      document.getElementById('next-question').style.display = 'none';
+    }
+
+    function selectAnswer(selected, correct) {
+      const buttons = document.querySelectorAll('.answer-btn');
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === correct) {
+          btn.classList.add('correct');
+        } else if (i === selected && i !== correct) {
+          btn.classList.add('incorrect');
+        }
+      });
+
+      if (selected === correct) {
+        score++;
+      }
+
+      document.getElementById('next-question').style.display = 'block';
+    }
+
+    document.getElementById('next-question').addEventListener('click', () => {
+      currentQuestion++;
+      loadQuestion();
+    });
+
+    function endQuiz() {
+      document.getElementById('quiz-container').style.display = 'none';
+      document.getElementById('quiz-complete').style.display = 'block';
+      const percentage = Math.round((score / quizData.length) * 100);
+      document.getElementById('final-score').textContent = `Puntuación: ${score}/${quizData.length} (${percentage}%)`;
+
+      // Actualizar progreso
+      userProgress = Math.max(userProgress, 75);
+      updateProgress();
+    }
+
+    document.getElementById('restart-quiz').addEventListener('click', () => {
+      currentQuestion = 0;
+      score = 0;
+      document.getElementById('quiz-complete').style.display = 'none';
+      document.getElementById('quiz-container').style.display = 'block';
+      loadQuestion();
+    });
+
+    // Inicialización
+    window.addEventListener('load', () => {
+      loadQuestion();
+      updateProgress();
+    });
+
+    window.addEventListener('scroll', updateProgress);
+
+    // Smooth scroll para anclas
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+ 
+</body>
+
+</html>
