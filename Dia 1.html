@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia 1</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #004d99;
+            /* Azul institucional */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            background-color: #003366;
+            /* Azul oscuro para la barra de navegación */
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+            /* Amarillo para el hover */
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        section {
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #004d99;
+            border-left: 5px solid #ffcc00;
+            padding-left: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #008080;
+            /* Nuevo color para subtítulos temáticos */
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+
+        /* Estilos para Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eaf6ff;
+            /* Fondo claro para encabezados */
+            color: #004d99;
+            font-weight: bold;
+        }
+
+        /* Estilos para el Acordeón (Interactividad) */
+        .acordeon-item {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .acordeon-titulo {
+            background-color: #e6e6e6;
+            color: #333;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex; /* Cambiado a flex */
+            justify-content: space-between; /* Para separar texto y símbolo */
+            align-items: center; /* Para centrar verticalmente */
+            width: 25%; /* Asegura que ocupe todo el ancho */
+        }
+
+        .acordeon-titulo::after {
+            content: '+';
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .acordeon-titulo.activo::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+
+        .acordeon-contenido {
+            padding: 15px;
+            background-color: #f9f9f9;
+            display: none;
+            /* Oculto por defecto */
+        }
+
+        body {
+            min-height: 800px;
+        }
+
+        #alert-dialog {
+            opacity: 0;
+            transition:
+                display 1s allow-discrete,
+                overlay 1s allow-discrete,
+                translate 1s,
+                opacity 1s;
+            translate: 0 50%;
+            will-change: translate, opacity;
+        }
+
+        #alert-dialog[open] {
+            opacity: 1;
+            translate: 0;
+
+            @starting-style {
+                opacity: 0;
+                translate: 0 50%;
+            }
+        }
+
+        #alert-dialog::backdrop {
+            background: linear-gradient(#000d, #000a);
+            opacity: 1;
+            transition:
+                display 1s allow-discrete,
+                opacity 1s;
+
+            @starting-style {
+                opacity: 0
+            }
+        }
+
+        #alert-dialog:not([open])::backdrop {
+            opacity: 0;
+        }
+
+
+        .llamada-accion {
+            background-color: #ffcc00;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            color: #003366;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sordoceguera: Una Discapacidad Única 👂👁️</h1>
+        <p><span class="llamada-accion" style="font-size: 1.2em;">Una pérdida sensorial dual con impacto profundo en la
+                vida.</span></p>
+    </header>
+    <div class="min-h-screen">
+        <nav>
+            <a href="#definicion">Definición</a>
+            <a href="#impacto">Impacto</a>
+            <a href="#evangelio">El Evangelio Táctil</a>
+            <a href="#comunicacion">Comunicación</a>
+            <a href="#quiz1">Quiz</a>
+        </nav>
+
+        <div class="container">
+
+            <section id="definicion">
+                <h2>Definición y Concepto</h2>
+                <p style="text-align: justify;">La <strong>sordoceguera</strong> es una <strong>discapacidad
+                        única</strong> en la cual se presenta
+                    deficiencia sensorial conjunta <i>(visual y auditiva)</i> que se manifiesta en mayor o menor grado,
+                    generando severas limitaciones en la comunicación, orientación, movilidad, acceso a la información y
+                    restricción para la participación social.</p>
+                <p style="text-align: justify;">Se trata de una condición especifica que no puede contemplarse como la
+                    suma de sordera y ceguera Tampoco se trata de una enfermedad, aun cuando muchas enfermedades y/o
+                    síndromes pueden ser causa.
+                    Una persona sordociega puede tener algún resto visual, auditivo o de ambos sentidos.
+                    De aquí que también sea aceptada la denominación de "perdida sensorial dual", en referencia a la
+                    pérdida combinada de los dos sentidos principales.
+                </p>
+
+                <blockquote style="text-align: right;">
+                    <button onclick="this.nextElementSibling.showModal()"><strong>Recuerda que...</strong></button>
+                    <dialog id="alert-dialog"
+                        style="text-align: center; width: 80%; max-width: 600px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px">
+                        No puede contemplarse como la simple suma de sordera y ceguera. <br> Se
+                        acepta la denominación de <strong>"pérdida sensorial dual"</strong>. <br> Una persona sordociega
+                        puede
+                        tener algún resto visual, auditivo o de ambos sentidos.
+                        <form method="dialog">
+                            <button>Cerrar</button>
+                        </form>
+                    </dialog>
+                </blockquote>
+            </section>
+
+            <section id="impacto">
+                <h2>El Impacto de la Pérdida Sensorial Dual</h2>
+                <p style="text-align: justify;">La Organización Internacional de Sordoceguera <b> Deafblind
+                        International </b>
+                    <i><b>(DBI)</b></i> refiere: "El termino sordoceguera describe una condición que combina, en una
+                    variedad de
+                    grados, un impedimento visual y auditivo.
+                    Dos impedimentos sensoriales multiplican e intensifican el impacto de cada uno sobre el otro,
+                    creando una severa discapacidad, la cual es diferente y única.
+                    Todas las personas sordociegas experimentan problemas con la comunicación, acceso a la información y
+                    movilidad. De cualquier manera, sus necesidades específicas varían enormemente de acuerdo con la
+                    edad, al momento en que se manifiesta o descubre y tipo de sordoceguera.
+                    Las personas sordociegas están imposibilitadas para usar un sentido que pueda compensar el
+                    impedimento del otro; Entonces, estas personas van a necesitar servicios que sean diferentes de
+                    aquellos diseñados exclusivamente para otras personas ciegas o sordas".
+                </p>
+                <blockquote style="text-align: center; margin: 1rem;">
+                    <button onclick="this.nextElementSibling.showModal()"><strong>Recuerda que...</strong></button>
+                    <dialog id="alert-dialog"
+                        style="text-align: center; width: 80%; max-width: 600px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px">
+                        <p>Según <strong>Deafblind International (DBI)</strong>, los dos impedimentos sensoriales
+                            <strong>multiplican e intensifican</strong> el impacto de cada uno sobre el otro, creando
+                            una severa
+                            discapacidad, la cual es <strong>diferente y única.</strong>
+                        </p>
+                        <form method="dialog">
+                            <button>Cerrar</button>
+                        </form>
+                    </dialog>
+                </blockquote>
+
+                <p style="text-align: justify;">La población general sordociega es muy heterogénea. Además del grado de
+                    las lesiones, los factores que determinan la diferenciación en los distintos grupos son:
+                    <b>
+                        <ul>
+                            <li> La etiología (Causas)</li>
+                            <li> La edad de aparición de la sordoceguera.</li>
+                            <li> El modo y el orden en que se presenta la discapacidad: pérdida simultánea de visión y
+                                oído, lesión
+                                visual previa a la lesión auditiva o viceversa.</li>
+                            <li> El ambiente de estimulación en el que se encuentra el individuo</li>
+                            <li> El nivel educativo alcanzado antes de la aparición de la discapacidad.</li>
+                            <li> La asociación de la sordoceguera a otros problemas físicos, psíquicos o sensoriales.
+                            </li>
+                        </ul>
+                    </b>
+                </p>
+
+                <h3>Limitaciones que genera la sordoceguera</h3>
+                <ul>
+                    <li><strong>En la comunicación</strong>
+                        <p style="text-align: justify;">Las limitaciones de la comunicación son diferentes en cada
+                            persona sordociega, debido a las variables que determinan las características en cada uno de
+                            ellos, <i> anteriormente mencionadas </i>, es así como se puede encontrar:
+                        <ul>
+                            👉🏼 Personas que no cuentan con ningún sistema de comunicación para relacionarse con el
+                            entorno.</ul>
+                        <ul>
+                            👉🏼 Personas que no manejan un sistema de comunicación completo, sino tan solo determinados
+                            aspectos de este.</ul>
+                        <ul>
+                            👉🏼 Personas cuyo sistema de comunicación Inicial deja de ser funcional, debido a la
+                            evolución y
+                            deterioro de su situación sensorial, entonces deben aprender otros sistemas más adecuados a
+                            las
+                            nuevas condiciones.</ul>
+                        </p>
+                        <blockquote style="text-align: left;"> <button
+                                onclick="this.nextElementSibling.showModal()"><strong>A saber...</strong></button>
+                            <dialog id="alert-dialog"
+                                style="text-align: center; width: 80%; max-width: 600px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px">
+                                Sin restar importancia a todas las otras limitaciones, se pretende hacer énfasis en la
+                                parte comunicativa debido a que nuestro objetivo y misión como cristianos es el de
+                                comunicar las buenas nuevas de salvación
+                                <form method="dialog">
+                                    <button>Cerrar</button>
+                                </form>
+                            </dialog>
+                        </blockquote>
+                    </li>
+                    <li><strong>En el Acceso a la información y participación. </strong>
+                        <p style="text-align: justify;">Las limitaciones de acceso a la
+                            información vienen dadas por las dificultades de comunicación. Una persona que no puede
+                            hacer
+                            uso libremente de las informaciones del entorno no puede relacionarse libre y oportunamente,
+                            ejercer plenamente sus derechos ni tomar las decisiones que le con-ciernen de forma
+                            autónoma.
+                            Pasa así a ser una persona en algún grado dependiente y socialmente vulnerable.</p>
+                    </li>
+                    <li><strong>En la Movilidad y Orientación. </strong><p style="text-align: justify;">
+                        La sordoceguera puede acarrear limitaciones
+                        importantes <b> en cuanto a capacidad física, equilibrio y orientación,</b> haciendo que el desplazarse
+                        se convierta en un reto insalvable si no se cuenta con ayuda. <br>
+                        Algunas adaptaciones de accesibilidad o iluminación pueden ser de gran ayuda, aunque muchas
+                        veces no puedan sustituir la necesidad de un acompañante.
+                    </li></p>
+                </ul>
+            </section>
+
+            <section id="evangelio">
+                <h2>El Evangelio Multisensorial: Ejemplos Bíblicos para Sordociegos 🙏</h2>
+                <p>El mensaje bíblico puede ser transmitido de manera efectiva a través de <strong>formatos táctiles,
+                        hápticos y multisensoriales</strong> que aprovechan los <strong>restos sensoriales</strong>
+                    (tacto, vibración, olfato) y <strong>sistemas de comunicación alternativos</strong> (lengua de
+                    signos táctil, braille, objetos simbólicos).</p>
+
+                <h3>1. La Creación (Génesis 1)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Formato Accesible</th>
+                            <th style="text-align: center;">Presentación (Tactil/Signos)</th>
+                            <th style="text-align: center;">Principio de Funcionamiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: justify;"><strong>Caja táctil de la Creación</strong> (Objetos y texturas por día)</td>
+                            <td style="text-align: justify;">Guía describe en <strong>LSC</strong>: “DIOS – CREAR – MUNDO”. <br> Se pasa <strong>una caja
+                                    por día</strong> para tocar y sentir la secuencia.</td>
+                            <td style="text-align: justify;">Usa <strong>tacto + secuencia temporal</strong>, construyendo el concepto con objetos
+                                concretos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2. Jesús calma la tormenta (Marcos 4:35-41)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Formato Accesible</th>
+                            <th style="text-align: center;">Presentación (Háptica/Vibración)</th>
+                            <th style="text-align: center;">Principio de Funcionamiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: justify;"><strong>Escena háptica con vibración</strong> (Barco, agua y vibrador)</td>
+                            <td style="text-align: justify;">Guía narra en <strong>LSC</strong>: “TORMENTA – MIEDO – JESÚS – PAZ”. Activa vibración
+                                fuerte → luego la <strong>apaga bruscamente</strong>.</td>
+                            <td style="text-align: justify;">UsaLa <strong>vibración = sonido/fuerza del viento</strong>, el <strong>cese = milagro/Paz
+                                    de Cristo</strong> experimentada físicamente.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>6. La Armadura de Dios (Efesios 6:10-18)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Formato Accesible</th>
+                            <th style="text-align: center;">Presentación (Participación Activa)</th>
+                            <th style="text-align: center;">Principio de Funcionamiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: justify;"><strong>Armadura táctil para ponerse</strong> (Piezas de ropa o materiales reales)</td>
+                            <td style="text-align: justify;">El guía <strong>viste a la persona</strong> pieza por pieza (Cinturón, Coraza, Casco),
+                                firmando el significado de cada una en palma.</td>
+                            <td style="text-align: justify;"><strong>Participación activa</strong>. La persona <strong>siente físicamente</strong> la
+                                protección de Dios, creando un anclaje emocional.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="llamada-accion"><strong>"La fe viene por el tocar, por el sentir, por el ser
+                        acompañado."</strong> El amor de Cristo se transmite a través de nuestras manos.</p>
+            </section>
+
+
+            <section id="heterogeneidad">
+                <h2>Factores de Diferenciación y Heterogeneidad</h2>
+                <p style="text-align: justify;">La población sordociega es muy heterogénea. El grado de las lesiones y otros factores determinan la
+                    diferenciación en los distintos grupos. Haz clic para expandir la información:</p>
+
+                <div class="acordeon-item">
+                    <button class="acordeon-titulo">Causas y Momento de Aparición</button>
+                    <div class="acordeon-contenido">
+                        <ul>
+                            <li><strong>Etiología (Causas)</strong>: Muchas enfermedades o síndromes pueden ser causa.
+                            </li>
+                            <li><strong>Edad de aparición</strong> de la sordoceguera.</li>
+                            <li><strong>Modo y Orden</strong> en que se presenta: pérdida simultánea, lesión visual
+                                previa a la auditiva o viceversa.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="acordeon-item">
+                    <button class="acordeon-titulo">Factores Personales y Ambientales</button>
+                    <div class="acordeon-contenido">
+                        <ul>
+                            <li>El <strong>ambiente de estimulación</strong> en el que se encuentra el individuo.</li>
+                            <li>El <strong>nivel educativo alcanzado</strong> antes de la aparición de la discapacidad.
+                            </li>
+                            <li>La <strong>asociación a otros problemas</strong> físicos, psíquicos o sensoriales.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comunicacion" style="text-align: justify;">
+                <h2>Desafíos en la Comunicación 💬</h2>
+                <p>Las limitaciones varían, lo que hace necesario abordar la comunicación con flexibilidad y comprensión
+                    de las necesidades individuales:</p>
+
+                <ol>
+                    <li>Personas que <strong>no cuentan con ningún sistema</strong> de comunicación para relacionarse
+                        con el entorno.</li>
+                    <li>Personas que <strong>no manejan un sistema de comunicación completo</strong>, sino tan sólo
+                        determinados aspectos del mismo.</li>
+                    <li>Personas cuyo sistema de comunicación inicial deja de ser funcional, debiendo <strong>aprender
+                            otros sistemas más adecuados</strong> a las nuevas condiciones.</li>
+                </ol>
+            </section>
+
+            <section id="recursos" style="text-align: justify;">
+                <h2>Recursos Prácticos para la Implementación</h2>
+                <p>La adaptación del Evangelio requiere preparación y herramientas específicas:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Recurso</th>
+                            <th style="text-align: center;">Utilidad y Acceso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Biblias en Braille</b></td>
+                            <td>Fuente de la Palabra escrita accesible. Contactar a Sociedades Bíblicas locales.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Kits Táctiles (Objetos Símbólicos)</b></td>
+                            <td>Materiales (lana, madera, texturas) para crear los escenarios bíblicos. Fomentan la
+                                creación de kits con materiales reciclados.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Capacitación en LSC</b></td>
+                            <td>Cursos de <b>Lengua de Señas Colombiana (LSC) Táctil</b> y <b>Guía-Interpretación</b>
+                                (Ofrecidos por
+                                <strong>INSOR</strong>, <strong>FENASCOL</strong>, Deafblind International, etc.).
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+
+        <section id="Quiz 1">
+            <a href="Quiz 1.html" target="_blank">
+                <h2>clic para realizar Quiz</h2>
+            </a>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const titulos = document.querySelectorAll('.acordeon-titulo');
+
+                    titulos.forEach(titulo => {
+                        titulo.addEventListener('click', () => {
+                            // Obtiene el contenido asociado a este título
+                            const contenido = titulo.nextElementSibling;
+
+                            // Alterna la clase 'activo' en el título para el estilo y el signo +/-
+                            titulo.classList.toggle('activo');
+
+                            // Muestra u oculta el contenido
+                            if (contenido.style.display === 'block') {
+                                contenido.style.display = 'none';
+                            } else {
+                                // Opcional: Cerrar otros acordeones si se desea uno solo abierto a la vez
+                                /*
+                                document.querySelectorAll('.acordeon-contenido').forEach(item => {
+                                    if (item !== contenido) item.style.display = 'none';
+                                });
+                                document.querySelectorAll('.acordeon-titulo').forEach(item => {
+                                    if (item !== titulo) item.classList.remove('activo');
+                                });
+                                */
+                                contenido.style.display = 'block';
+                            }
+                        });
+                    });
+                });
+            </script>
+            <script src="progress.js"></script>
+
+</body>
+
+</html>
