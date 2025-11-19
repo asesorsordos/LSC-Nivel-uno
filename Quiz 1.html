@@ -84,11 +84,13 @@
         
         /* Estilos para el botón de calificación */
         #btnCalificar {
+                      background-color: #e6b800;
+        }
+
+        #btnReintentar {
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: #ffcc00;
-            color: #003366;
             font-size: 1.2em;
             font-weight: bold;
             border: none;
@@ -96,6 +98,32 @@
             cursor: pointer;
             transition: background-color 0.3s;
             margin-top: 30px;
+            background-color: #ff0202; 
+            color: white;
+        }
+
+        #btnReintentar:hover {
+            background-color: #ff0202d0;
+        }
+
+        /* Estilos para el resultado final */
+        #resultado {
+            margin-top: 30px;
+            </div>
+
+            <button type="button" id="btnCalificar">Calificar Evaluación</button>
+            <button type="button" id="btnReintentar" style="display: none;">Reintentar Quiz</button>
+        </form>
+
+        <div id="resultado"></div>
+            resultadoDiv.style.display = 'block';
+            btnCalificar.style.display = 'none';
+            btnReintentar.style.display = 'block';
+        });
+
+        btnReintentar.addEventListener('click', function() {
+
+
         }
 
         #btnCalificar:hover {
