@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia 5</title>
+    <style>
+        :root {
+            --primario: #003366;
+            --secundario: #e6f2ff;
+            --acento: #d32f2f;
+            --texto: #212121;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            background: #fafafa;
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--primario);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background: #fff;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 1rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--primario);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primario);
+        }
+
+        .accordion {
+            background: var(--secundario);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .panel {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .panel.active {
+            max-height: 2000px;
+            padding: 1.5rem 0;
+        }
+
+        .quiz {
+            background: #f0f8ff;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+        }
+
+        button {
+            background: var(--primario);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+        }
+
+        button:hover {
+            background: #002244;
+        }
+
+        #alert-dialog {
+            opacity: 0;
+            transition:
+                display 1s allow-discrete,
+                overlay 1s allow-discrete,
+                translate 1s,
+                opacity 1s;
+            translate: 0 50%;
+            will-change: translate, opacity;
+        }
+
+        #alert-dialog[open] {
+            opacity: 1;
+            translate: 0;
+
+            @starting-style {
+                opacity: 0;
+                translate: 0 50%;
+            }
+        }
+
+        #alert-dialog::backdrop {
+            background: linear-gradient(#000d, #000a);
+            opacity: 1;
+            transition:
+                display 1s allow-discrete,
+                opacity 1s;
+
+            @starting-style {
+                opacity: 0
+            }
+        }
+
+        #alert-dialog:not([open])::backdrop {
+            opacity: 0;
+        }
+
+        #resultados {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #e8f5e8;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .correct {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            color: var(--acento);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primario);
+            color: white;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1 style="color: #e6f2ff;">Funciones del Guía Intérprete<br>para Personas Sordociegas</h1>
+        <p> EFIS </p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#intro">Introducción</a></li>
+            <li><a href="#interpretacion">Interpretación Lingüística</a></li>
+            <li><a href="#contextualizacion">Contextualización</a></li>
+            <li><a href="#guia">Función Guía</a></li>
+            <li><a href="#quiz">Evaluación Interactiva</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section id="intro">
+            <h2>Introducción</h2>
+            <p>La interpretación con personas sordociegas está compuesta por una serie de tareas o funciones
+                multifacéticas y variadas, las cuales están engranadas entre sí.</p>
+        </section>
+
+        <section id="interpretacion">
+            <h2>Función Interpretación Lingüística</h2>
+            <p>Consiste en verter el contenido de un mensaje emitido en una lengua o sistema de comunicación, en la
+                lengua, sistema o forma de comunicación utilizado por la persona sordociega y viceversa.</p>
+            <p>El<strong> Objetivo</strong> es entregar el mensaje fielmente, transfiriendo tanto el contenido como el
+                espíritu del emisor, incorporándolo en el contexto y usando el lenguaje más comprensible para la persona
+                sordociega.</p>
+
+            <div class="accordion">Conlleva una serie de tareas previas ▼</div>
+            <div class="panel">
+                <ul>
+                    <li>Determinación del sistema de comunicación más adecuado.</li>
+                    <li>Preparación del entorno.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contextualizacion">
+            <h2>Función Contextualización</h2>
+            <p>Consiste en transmitir la información visual y auditiva del entorno que la persona sordociega necesite
+                para que la situación le resulte coherente.</p>
+
+            <div class="accordion">En cuanto a la información visual ▼</div>
+            <div class="panel">
+                <ul>
+                    <li><b> Descripción/información de personas:</b> Las personas que están y dónde están ubicadas, la
+                        persona que habla y donde se encuentra, las personas que llegan y las que se van.</li>
+                    <li><b>Descripción del espacio físico: </b>Tanto para interiores como para
+                        exteriores. Como es el lugar / paisaje en el que se encuentra, qué forma tiene, el tamaño, etc.
+                    </li>
+                    <li><b>Descripción de los objetos que hay en un determinado lugar: </b>Los objetos que hay, las
+                        mesas, las sillas, tos medios audiovisuales, la forma en que están colocados, a qué distancia,
+                        etc.</li>
+                    <li><b>Descripción del ambiente:</b> La decoración del salón de reunión, los sonidos en medio del
+                        culto, la alegría al salir del ser vicio, etc.</li>
+                </ul>
+            </div>
+
+            <div class="accordion">En cuanto a la información auditiva ▼</div>
+            <div class="panel">
+                <p>Sonidos que se producen en el entorno: un teléfono que suena e interrumpe la conversación, una
+                    llamada a la puerta, los avisos de megafonía, etc.</p>
+            </div>
+        </section>
+        <section id="contextualizacion">
+            <h2>Información visual y auditiva</h2>
+            <div class="accordion">Los acontecimientos: ▼</div>
+            <div class="panel">
+                <p>
+                    Describir lo que está sucediendo a su alrededor, que no puede percibir tocando con sus manos, y que
+                    influye en la comprensión de la situación.
+                </p>
+                <blockquote style="text-align: center; margin: 1rem;">
+                    <button onclick="this.nextElementSibling.showModal()"><strong>Algunos ejemplos:</strong></button>
+                    <dialog id="alert-dialog"
+                        style="text-align: center; width: 80%; max-width: 600px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px">
+                        <p style="text-align: justify;">
+                            Si la persona sordociega comienza una conversación privada, que no desea compartir con
+                            otros, el guia-interprete debe informarle de si otras personas están mirando.
+                            El porqué de las interrupciones durante la deambulación, que está haciendo la gente (si es
+                            interesante o llamativo).
+                        </p>
+                        <form method="dialog">
+                            <button>Cerrar</button>
+                        </form>
+                    </dialog>
+                </blockquote>
+            </div>
+            <div class="accordion">Las interrupciones y pausas: ▼</div>
+            <div class="panel">
+                <p style="text-align: justify;">
+                    Es importante avisar y explicar los vacíos o silencios que se producen en la comunicación, pues
+                    estos llegan a la persona sordociega como cortes bruscos en su contacto con el entorno, sin ninguna
+                    razón imaginable, puesto que no saben lo que sucede a su alrededor.</p>
+                <blockquote style="text-align: center; margin: 1rem;">
+                    <button onclick="this.nextElementSibling.showModal()"><strong>Algunos ejemplos:</strong></button>
+                    <dialog id="alert-dialog"
+                        style="text-align: justify; width: 80%; max-width: 600px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px">
+                        <p style="text-align: justify;">
+                        <ul>
+                            ➡️ El médico se ha callado porque la enfermera acaba de entrar.</ul>
+                        <ul>
+
+                            ➡️ El ponente en una conferencia se ha detenido porque alguien ha entrado en la sala.</ul>
+                        <ul>
+
+                            ➡️ El interlocutor está hablando con la persona sordociega y suelta sus manos porque una
+                            tercera persona le está preguntado algo.</ul>
+                        <ul>
+
+                            ➡️ Se han detenido al caminar debido a que una tercera persona les pregunta sobre una
+                            dirección.</ul>
+
+                        </p>
+                        <form method="dialog">
+                            <button>Cerrar</button>
+                        </form>
+                    </dialog>
+                </blockquote>
+
+            </div>
+            <div class="accordion">Turnos en la conversación: ▼</div>
+            <div class="panel">
+                <p style="text-align: justify;">
+                    Se trata de indicar a la persona sordociega si el interlocutor ha terminado ya de hablar, si está
+                    esperando una respuesta, si ella puede ya responder, si le han dado la palabra y puede participar.
+                    Cuando se hay varios interlocutores se debe ir indicándole a la persona sordociega quién habla para
+                    que ella pueda seguir la línea de pensamiento de cada participante y poder dirigirse a ellos cuando
+                    lo desee. </p>
+            </div>
+            <div class="accordion">Reacciones y emociones que se trata de transmitir: ▼</div>
+            <div class="panel">
+                <p style="text-align: justify;">
+                    Se trata de indicar a la persona sordociega la entonación del interlocutor al emitir una frase
+                    (si es una pregunta, si espera una respuesta, si es solo un comentario) así mismo los matices
+                    emocionales que impregna a su voz (admiración, enfado, seriedad, informalidad, prisa, etc.) y la
+                    descripción del comportamiento (señales de lenguaje corporal, su dinámica, movimientos de
+                    cabeza, expresiones faciales, etc.)</p>
+        </section>
+
+        <section id="guia">
+            <h2>Función Guía</h2>
+
+            <div class="accordion">Para el desarrollo de esta función se deben considerar los siguientes aspectos: ▼
+            </div>
+            <div class="panel">
+
+                <p style="text-align: justify;">✔️ Motivar a la persona sordociega a que use el bastón para que lo
+                    identifique como tal para que le sirva de apoyo en el desplazamiento.</p>
+
+                <p style="text-align: justify;"> El bastón blanco y rojo, como dispositivo físico, aporta
+                    innumerables beneficios a
+                    su portador: le ayuda a detectar obstáculos con antelación, a seguir las guías podo táctiles
+                    (Baldosa inclusiva que tiene una textura particular y que es fácilmente reconocible al tacto,
+                    sirven
+                    para alertar a las personas que tienen deficiencias visuales que están al borde de una zona de
+                    peligro, por ejemplo en el cruce de una calle), a determinar el ancho de la vía por donde se
+                    transita, a encontrar una pared o elemento de referencia.
+                    La función de las tiras del bastón blanco y rojo es sobre todo informativa, es decir, tanto se
+                    beneficia quien lo lleva como quien lo ve. las tiras rojas indican la presencia de una privación
+                    auditiva que se suma a la privación visual. <br><br>
+
+                    ✔️ No llevar a la persona sordociega por delante, el guia siempre debe ir un paso adelante
+                    permitiendo la percepción de los movimientos del guia y para advertir carca de algún obstáculo.
+                    <br><br>
+
+                    ✔️ La persona sordociega se sujeta al guia de su brazo por encima del codo o en el hombro de acuerdo
+                    con las necesidades. <br><br>
+
+                    ✔️ El guia no requiere dar instrucciones permanentes sobre el desplazamiento, pues la persona
+                    sordociega lo seguirá en sus movimientos. <br><br>
+
+                    ✔️ El guia debe caminar espontáneamente y con tranquilidad, ya que la tensión y el estrés se
+                    trasmiten a la persona sordociega produciendo desconfianza.<br><br>
+
+                    ✔️ El guia debe adaptarse a la velocidad de la marcha de la persona sordociega.<br><br>
+
+                    ✔️ El guia no debe dejar nunca sola a la persona sordociega en un espacio que ella desconozca y si lo
+                    debe hacer es importante que lo ubique con algún elemento que le sirva como punto de
+                    referencia.<br><br>
+
+                    ✔️ Para caminar en lugares de paso estrecho, el guia ubica el brazo del cual está sujeta la persona
+                    sordociega hacia atrás en la mitad de su espalda para indicarle a ella la ubicación, finalizando
+                    toman la posición habitual.<br><br>
+
+                    ✔️ Para pasar una puerta, además de indicar el paso estrecho, el guia coloca la mano libre de la
+                    persona sordociega en el marco de la puerta de manera que así ella obtenga la referencia de cuando
+                    pasó definitivamente la puerta.<br><br>
+
+                    ✔️ Para usar las escaleras, ya sean mecánicas o eléctricas, se le debe preguntar a la persona
+                    sordociega cual prefiere. La aproximación se hace de frente, el guia sube un escalón y todo el
+                    tiempo está un paso por delante, cuando llega al final de la escalera para de manera que la persona
+                    sordociega sepa que le queda un paso más, de igual manera se hace al descender las escaleras. En el
+                    caso de las escaleras eléctricas se ubica la mano de la persona sordociega en el pasamanos y el guia
+                    toma la decisión de subir y al final el guia da un paso adelante.
+                </p>
+            </div>
+         <!--  <div class="panel">
+                <p></p>
+            </div>
+            </div>
+
+            <div class="accordion">Técnica de guía humana ▼</div>
+            <div class="panel">
+                <ul>
+                    <li>El guía va siempre un paso adelante.</li>
+                    <li>La persona sordociega se sujeta por encima del codo o en el hombro.</li>
+                    <li>No dar instrucciones verbales constantes; la persona sigue los movimientos.</li>
+                    <li>Caminar con tranquilidad, adaptarse al ritmo de la persona sordociega.</li>
+                    <li>Nunca dejar sola a la persona en espacio desconocido sin referencia.</li>
+                    <li>Pasos estrechos: brazo del guía hacia atrás en la espalda.</li>
+                    <li>Puertas: colocar mano de la persona en el marco.</li>
+                    <li>Escaleras: aproximación frontal, guía un paso adelante, indicar final. En escaleras mecánicas
+                        colocar mano en pasamanos.</li>
+                </ul>
+            </div>-->
+        </section>
+
+       <section id="quiz" class="quiz">
+  <h2>Evaluación Interactiva (15 preguntas)</h2>
+  
+  <!-- Temporizador -->
+  <div style="text-align:center; margin-bottom: 2rem; font-size: 1.8rem; font-weight: bold; color: #d32f2f;">
+    Tiempo restante: <span id="timer">20:00</span>
+  </div>
+
+  <form id="quizForm">
+
+    <!-- === LAS 15 PREGUNTAS (sin chivatos) === -->
+    <div class="question">
+      <p>1. ¿Cuál es el objetivo principal de la interpretación lingüística?</p>
+      <label><input type="radio" name="q1" value="a"> a) Cambiar el significado del mensaje</label><br>
+      <label><input type="radio" name="q1" value="b"> b) Transmitir fielmente contenido y espíritu del mensaje</label><br>
+      <label><input type="radio" name="q1" value="c"> c) Hablar más despacio</label>
+    </div>
+
+    <div class="question">
+      <p>2. ¿Qué tarea previa NO se menciona en la interpretación lingüística?</p>
+      <label><input type="radio" name="q2" value="a"> a) Determinar sistema de comunicación</label><br>
+      <label><input type="radio" name="q2" value="b"> b) Preparación del entorno</label><br>
+      <label><input type="radio" name="q2" value="c"> c) Elegir la ropa del guía</label>
+    </div>
+
+    <div class="question">
+      <p>3. En contextualización, ¿qué debe informar el guía si alguien entra mientras el médico habla?</p>
+      <label><input type="radio" name="q3" value="a"> a) Nada, no es relevante</label><br>
+      <label><input type="radio" name="q3" value="b"> b) Que la enfermera entró y por eso se detuvo</label><br>
+      <label><input type="radio" name="q3" value="c"> c) Solo continuar la conversación</label>
+    </div>
+
+    <div class="question">
+      <p>4. ¿Qué indican las tiras rojas del bastón?</p>
+      <label><input type="radio" name="q4" value="a"> a) Solo discapacidad visual</label><br>
+      <label><input type="radio" name="q4" value="b"> b) Adicionalmente privación auditiva</label><br>
+      <label><input type="radio" name="q4" value="c"> c) Peligro inminente</label>
+    </div>
+
+    <div class="question">
+      <p>5. ¿Dónde debe ir siempre el guía respecto a la persona sordociega?</p>
+      <label><input type="radio" name="q5" value="a"> a) Detrás</label><br>
+      <label><input type="radio" name="q5" value="b"> b) Un paso adelante</label><br>
+      <label><input type="radio" name="q5" value="c"> c) Al lado</label>
+    </div>
+
+    <div class="question">
+      <p>6. Al pasar una puerta, ¿qué se hace con la mano libre de la persona sordociega?</p>
+      <label><input type="radio" name="q6" value="a"> a) Se coloca en el marco de la puerta</label><br>
+      <label><input type="radio" name="q6" value="b"> b) Se deja colgando</label><br>
+      <label><input type="radio" name="q6" value="c"> c) Se sujeta del guía con ambas manos</label>
+    </div>
+
+    <div class="question">
+      <p>7. ¿Es obligatorio dar instrucciones verbales constantes durante la deambulación?</p>
+      <label><input type="radio" name="q7" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q7" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>8. En conversaciones con varios interlocutores, el guía debe indicar quién habla.</p>
+      <label><input type="radio" name="q8" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q8" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>9. El guía debe adaptarse siempre a la velocidad de marcha de la persona sordociega.</p>
+      <label><input type="radio" name="q9" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q9" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>10. ¿Se puede dejar sola a la persona sordociega en un lugar desconocido sin referencia?</p>
+      <label><input type="radio" name="q10" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q10" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>11. En pasos estrechos, el guía coloca su brazo hacia atrás en la espalda.</p>
+      <label><input type="radio" name="q11" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q11" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>12. La tensión del guía NO se transmite a la persona sordociega.</p>
+      <label><input type="radio" name="q12" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q12" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>13. Se deben transmitir las emociones y entonación del interlocutor.</p>
+      <label><input type="radio" name="q13" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q13" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>14. El bastón sirve solo para apoyo físico, no para información al entorno.</p>
+      <label><input type="radio" name="q14" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q14" value="false"> Falso</label>
+    </div>
+
+    <div class="question">
+      <p>15. En escaleras mecánicas, el guía coloca la mano de la persona en el pasamanos.</p>
+      <label><input type="radio" name="q15" value="true"> Verdadero</label><br>
+      <label><input type="radio" name="q15" value="false"> Falso</label>
+    </div>
+
+    <button type="button" id="botonCalificar" onclick="calificarQuiz()">Calificar Evaluación</button>
+  </form>
+
+  <div id="resultados">
+    <h3>Resultados</h3>
+    <p id="puntaje"></p>
+    <div id="detalle"></div>
+    <button onclick="location.reload()">Volver a intentar</button>
+  </div>
+
+</section>
+
+    </main>
+    
+     <section id="siguiente-leccion" style="text-align: center; border-bottom: none;color: #003366;background-color: #b5cce4;">
+            <h2>Continuar Aprendiendo</h2>
+            <a href="Dia 6.html" target="_blank" class="llamada-accion"
+                style="display: inline-block; text-decoration: none; font-size: 1.2em; padding: 15px 30px;">
+                ➡️ Ir a la siguiente Lección
+            </a>
+        
+
+    <footer>
+        <p>Curso creado con ❤️ para la formación de guías intérpretes de personas sordociegas – 2025</p>
+    </footer>
+     </section>
+    <script>
+        // Acordeones
+        document.querySelectorAll('.accordion').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                const panel = btn.nextElementSibling;
+                panel.classList.toggle('active');
+            });
+        });
+
+        // Calificación del quiz
+        function calificarQuiz() {
+            const respuestas = {
+                q1: 'b', q2: 'c', q3: 'b', q4: 'b', q5: 'b',
+                q6: 'a', q7: 'false', q8: 'true', q9: 'true', q10: 'false',
+                q11: 'true', q12: 'false', q13: 'true', q14: 'false', q15: 'true'
+            };
+
+            let correctas = 0;
+            let detalle = '';
+
+            for (let i = 1; i <= 15; i++) {
+                const seleccion = document.querySelector(`input[name="q${i}"]:checked`);
+                if (seleccion) {
+                    if (seleccion.value === respuestas[`q${i}`]) {
+                        correctas++;
+                        detalle += `<p class="correct">Pregunta ${i}: ¡Correcta!</p>`;
+                    } else {
+                        detalle += `<p class="incorrect">Pregunta ${i}: Incorrecta (respuesta correcta: ${respuestas[`q${i}`] === 'true' ? 'Verdadero' : respuestas[`q${i}`] === 'false' ? 'Falso' : respuestas[`q${i}`].toUpperCase()})</p>`;
+                    }
+                } else {
+                    detalle += `<p class="incorrect">Pregunta ${i}: No respondida</p>`;
+                }
+            }
+
+            const porcentaje = Math.round((correctas / 15) * 100);
+            document.getElementById('puntaje').innerHTML = `Obtuviste <strong>${correctas} de 15</strong> (${porcentaje}%)`;
+
+            document.getElementById('detalle').innerHTML = detalle;
+            document.getElementById('resultados').style.display = 'block';
+            document.querySelector('button[onclick="calificarQuiz()"]').style.display = 'none';
+            window.scrollTo({ top: document.getElementById('resultados').offsetTop - 100, behavior: 'smooth' });
+        }
+    </script>
+    <script>
+  // === ACORDEONES (sin cambios) ===
+  document.querySelectorAll('.accordion').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      const panel = btn.nextElementSibling;
+      panel.classList.toggle('active');
+    });
+  });
+
+  // === TEMPORIZADOR DE 20 MINUTOS ===
+  let tiempoRestante = 20 * 60; // 20 minutos en segundos
+  const timerElement = document.getElementById('timer');
+  const botonCalificar = document.getElementById('botonCalificar');
+
+  const actualizarTimer = () => {
+    const minutos = Math.floor(tiempoRestante / 60).toString().padStart(2, '0');
+    const segundos = (tiempoRestante % 60).toString().padStart(2, '0');
+    timerElement.textContent = `${minutos}:${segundos}`;
+
+    if (tiempoRestante <= 60) {
+      timerElement.style.color = '#d32f2f';
+      timerElement.style.fontWeight = 'bold';
+    }
+
+    if (tiempoRestante <= 0) {
+      clearInterval(intervalo);
+      timerElement.textContent = "00:00";
+      timerElement.style.color = '#b71c1c';
+      botonCalificar.style.display = 'none';
+      calificarQuiz(); // Califica automáticamente
+      alert("¡Se acabó el tiempo! Tu examen ha sido calificado automáticamente.");
+      return;
+    }
+    tiempoRestante--;
+  };
+
+  const intervalo = setInterval(actualizarTimer, 1000);
+  actualizarTimer(); // Primera llamada inmediata
+
+  // === CALIFICACIÓN DEL QUIZ (sin cambios) ===
+  function calificarQuiz() {
+    clearInterval(intervalo); // Para el temporizador al calificar
+
+    const respuestas = {
+      q1: 'b', q2: 'c', q3: 'b', q4: 'b', q5: 'b',
+      q6: 'a', q7: 'false', q8: 'true', q9: 'true', q10: 'false',
+      q11: 'true', q12: 'false', q13: 'true', q14: 'false', q15: 'true'
+    };
+
+    let correctas = 0;
+    let detalle = '';
+
+    for (let i = 1; i <= 15; i++) {
+      const seleccion = document.querySelector(`input[name="q${i}"]:checked`);
+      if (seleccion) {
+        if (seleccion.value === respuestas[`q${i}`]) {
+          correctas++;
+          detalle += `<p class="correct">Pregunta ${i}: ¡Correcta!</p>`;
+        } else {
+          const correcta = respuestas[`q${i}`] === 'true' ? 'Verdadero' : respuestas[`q${i}`] === 'false' ? 'Falso' : respuestas[`q${i}`].toUpperCase();
+          detalle += `<p class="incorrect">Pregunta ${i}: Incorrecta (correcta: ${correcta})</p>`;
+        }
+      } else {
+        detalle += `<p class="incorrect">Pregunta ${i}: No respondida</p>`;
+      }
+    }
+
+    const porcentaje = Math.round((correctas / 15) * 100);
+    document.getElementById('puntaje').innerHTML = `Obtuviste <strong>${correctas} de 15</strong> (${porcentaje}%)`;
+
+    document.getElementById('detalle').innerHTML = detalle;
+    document.getElementById('resultados').style.display = 'block';
+    botonCalificar.style.display = 'none';
+    window.scrollTo({ top: document.getElementById('resultados').offsetTop - 100, behavior: 'smooth' });
+  }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dia 6</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+        }
+
+        .header-title {
+            color: #0d6efd;
+            font-weight: bold 2.2rem/1.2 "Segoe UI", sans-serif;
+        }
+
+        .canvas-container {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+        }
+
+        .result-alert {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .accordion-button {
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="header-title text-center mb-5">Recomendaciones Generales<br></h1>
+        <h4 class="mb-6 text-primary">En la relación y trato con la Persona Sordociega</h4>
+
+        <!-- Contenido en accordiones -->
+        <div class="accordion mb-5" id="accordionGeneral">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#respeto"
+                        aria-expanded="true">
+                        Respeto como personas
+                    </button>
+                </h2>
+                <div id="respeto" class="accordion-collapse collapse show" data-bs-parent="#accordionGeneral">
+                    <div class="accordion-body">
+                        No hay que verlos como individuos con carencias y limitaciones, ya que se estaría priorizando su
+                        discapacidad y no su esencia, sino como personas adultas iguales a las demás. Esto debe
+                        reflejarse en la forma de dirigirse a ellas: hablarles directamente, no tratarlas como objetos,
+                        no manipularlas ni moverlas físicamente sin su consentimiento.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#independencia">
+                        No sobreprotegerles
+                    </button>
+                </h2>
+                <div id="independencia" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                    <div class="accordion-body">
+                        Respetar y fomentar su independencia. Ayudar solo en lo que realmente no puedan hacer por sí
+                        mismos debido a la discapacidad. Si no presentan otro problema, pueden hacer cualquier cosa.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#decisiones">
+                        No tomar decisiones por ellos
+                    </button>
+                </h2>
+                <div id="decisiones" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                    <div class="accordion-body">
+                        Ofrecer todas las posibilidades y dejar que elijan. Darles toda la información para que tomen
+                        sus propias decisiones. El objetivo del intérprete es precisamente que tengan control y
+                        autonomía sobre sus vidas. <br>
+                        No se pue de decidir por ellos porque sea más rápido o más cómodo, no se puede olvidar que, si
+                        la persona sordociega pudiera ver y oír, el intérprete no estaría allí.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#igualdad">
+                        Trato de igualdad
+                    </button>
+                </h2>
+                <div id="igualdad" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                    <div class="accordion-body">
+                        No tratarlas como inferiores por su ritmo diferente. El guía-intérprete no es superior aunque
+                        vea y oiga; la relación es profesional y de servicio, nunca de poder.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#necesidades">
+                        Respeto a las necesidades
+                    </button>
+                </h2>
+                <div id="necesidades" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                    <div class="accordion-body">
+                        El esfuerzo que hace la persona sordociega de "ver y oír" por medio del tacto es constante,
+                        requiere gran concentración y conlleva al cansancio. <br> El guia-Intérprete debe acordar con la
+                        persona señales para sugerir descanso.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#dialogar">
+                        Dialogar y negociar
+                    </button>
+                </h2>
+                <div id="dialogar" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                    <div class="accordion-body" style="text-align: justify;">
+                        Puesto que este trabajo supone una gran cercanía y un contacto muy estrecho, es imprescindible
+                        dialogar para hacer saber al otro las cosas que puedan molestar, porque eso afecta a todo el
+                        desarrollo del trabajo: olores, si se está colgando demasiado en tus brazos... En cualquier
+                        caso, y debido a la cercanía que se mantiene durante el tiempo de trabajo, es importante no
+                        utilizar olores demasiado fuertes que puedan incluso molestar en la recepción de la información.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#presentarse">
+                        Presentarse siempre
+                    </button>
+                </h2>
+                <div id="presentarse" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                    <div class="accordion-body" style="text-align: justify;">
+                        Esto se debe hacer siempre al inicio de la conversación e identificarse de nuevo tras cada
+                        separación, ausencia larga, puesto que, al regresar, la persona sordociega no sabrá si es la
+                        misma persona que regresa u otra que desea Iniciar una conversación con ella. Así se evitan
+                        confusiones o molestias.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección culto -->
+        <h2 class="mt-5 mb-4 text-primary">En cuanto a la asistencia a nuestras reuniones de culto y fraternidad</h2>
+        <div class="accordion mb-5" id="accordionCulto">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#ubicacion">
+                        Ubicación en los servicios
+                    </button>
+                </h2>
+                  <p style="margin-left: 1pc;">   Se deben tener en cuenta factores como:</p>
+                <div id="ubicacion" class="accordion-collapse collapse show" data-bs-parent="#accordionCulto">
+                    <div class="accordion-body">                        
+                        <ul>
+                            <li>Cercanía al predicador → beneficioso para quienes tengan baja visión.</li>
+                            <li>Cercanía a cabinas de sonido → algunos aprovechan vibraciones, otros se molestan.</li>
+                            <li>Buena ventilación → el calor o frío extremo afecta la concentración.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#tratoCulto">
+                        Trato durante el culto y con los hermanos
+                    </button>
+                </h2>
+                <div id="tratoCulto" class="accordion-collapse collapse" data-bs-parent="#accordionCulto">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Participar plenamente del culto (ofrenda, cantos, oración personal).</li>
+                            <li>No propiciar conversaciones durante los momentos importantes.</li>
+                            <li>Relevos de guía-intérprete con mínima distracción.</li>
+                            <li>Al terminar, no dejar sola a la persona ni impedir que otros se acerquen; favorecer la
+                                integración.</li>
+                            <li>No tomar fotos/videos sin consentimiento expreso;esto podría incomodarle y afectaría el orden durante el culto.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación interactiva -->
+        <h2 class="text-center mb-4">Evaluación Interactiva Auto-Calificable</h2>
+        <div class="card shadow">
+            <div class="card-body">
+                <form id="quizForm">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item">
+                            Las personas sordociegas deben ser vistas principalmente por sus carencias y
+                            limitaciones.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q1" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q1" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Debemos tratarlas como personas adultas y no manipularlas físicamente sin
+                            consentimiento.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q2" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q2" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Es correcto sobreprotegerlas en todo momento.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q3" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q3" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Solo debemos ayudar en lo que realmente no puedan hacer por sí mismos.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q4" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q4" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Podemos tomar decisiones por ellos si es más rápido o cómodo.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q5" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q5" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            El guía-intérprete es superior a la persona sordociega.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q6" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q6" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Hay que acordar señales para descansos por el cansancio que genera el esfuerzo táctil.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q7" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q7" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Es recomendable usar perfumes fuertes.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q8" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q8" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Solo es necesario presentarse al inicio del día.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q9" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q9" value="falso"> <label>Falso</label></div>
+                        </li>
+                        <li class="list-group-item">
+                            Al terminar el culto podemos tomar fotos o videos sin pedir permiso.<br>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q10" value="verdadero"> <label>Verdadero</label></div>
+                            <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
+                                    name="q10" value="falso"> <label>Falso</label></div>
+                        </li>
+                    </ol>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calificarQuiz()">Calificar
+                            Evaluación</button>
+                    </div>
+                </form>
+
+                <div id="resultado" class="mt-4"></div>
+                <div class="canvas-container"><canvas id="medidorCanvas" width="200" height="200"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const respuestasCorrectas = [
+    'falso','verdadero','falso','verdadero','falso',
+    'falso','verdadero','falso','falso','falso'
+  ];
+
+  function calificarQuiz() {
+    let aciertos = 0;
+    const total = respuestasCorrectas.length;
+
+    for (let i = 1; i <= total; i++) {
+      const seleccion = document.querySelector(`input[name="q${i}"]:checked`);
+      if (seleccion && seleccion.value === respuestasCorrectas[i-1]) {
+        aciertos++;
+      }
+    }
+
+    const porcentaje = Math.round((aciertos / total) * 100);
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '¡¡EXCELENTE!! Dominas las recomendaciones';
+    else if (porcentaje >= 80) mensaje = '¡Muy bien! Casi perfecto';
+    else if (porcentaje >= 60) mensaje = 'Bien, pero repasa un poco más';
+    else mensaje = 'Te recomiendo volver a leer la lección con calma';
+
+    document.getElementById('resultado').innerHTML = `
+      <div class="alert ${porcentaje >= 80 ? 'alert-success' : porcentaje >= 60 ? 'alert-warning' : 'alert-danger'} text-center p-4">
+        <h4 class="mb-3">¡Resultado!</h4>
+        <p class="fs-3 mb-2"><strong>${aciertos}</strong> de <strong>${total}</strong> → <strong>${porcentaje}%</strong></p>
+        <p class="fs-5 mb-4">${mensaje}</p>
+        <button type="button" class="btn btn-lg btn-outline-primary" onclick="reintentar()">
+          Reintentar evaluación
+        </button>
+      </div>`;
+
+    // Dibujar medidor Canvas
+    dibujarMedidor(porcentaje);
+  }
+
+  function dibujarMedidor(porcentaje) {
+    const canvas = document.getElementById('medidorCanvas');
+    const ctx = canvas.getContext('2d');
+    const centroX = canvas.width / 2;
+    const centroY = canvas.height / 2;
+    const radio = 80;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Fondo gris
+    ctx.beginPath();
+    ctx.arc(centroX, centroY, radio, 0, 2 * Math.PI);
+    ctx.strokeStyle = '#e9ecef';
+    ctx.lineWidth = 18;
+    ctx.stroke();
+
+    // Arco de progreso
+    const anguloFinal = (porcentaje / 100) * 2 * Math.PI - Math.PI / 2;
+    ctx.beginPath();
+    ctx.arc(centroX, centroY, radio, -Math.PI / 2, anguloFinal);
+    ctx.strokeStyle = porcentaje >= 80 ? '#198754' : porcentaje >= 60 ? '#ffc107' : '#dc3545';
+    ctx.lineWidth = 18;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Texto central
+    ctx.font = 'bold 42px Arial';
+    ctx.fillStyle = '#212529';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(porcentaje + '%', centroX, centroY);
+  }
+
+  // ←←← NUEVA FUNCIÓN REINTENTAR ←←←
+  function reintentar() {
+    // Desmarcar todas las respuestas
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.checked = false;
+    });
+
+    // Borrar resultado y medidor
+    document.getElementById('resultado').innerHTML = '';
+    const canvas = document.getElementById('medidorCanvas');
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+
+    // Volver arriba del cuestionario (opcional, queda bonito)
+    document.querySelector('#quizForm').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+
+</html>
